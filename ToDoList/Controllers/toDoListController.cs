@@ -32,14 +32,14 @@ namespace toDoList.Api.Controllers
         }
 
         [HttpPost("{id}", Name = "Post")]
-        public IActionResult PostToDoList([FromBody] toDoListDto ReturnList)
+        public IActionResult PostToDoList([FromBody] Models.toDoList ReturnList)
         {
             if (ReturnList == null)
             {
                 return BadRequest();
             }
 
-            var final = new toDoListDto()
+            var final = new Models.toDoList()
             {
                 Id = ReturnList.Id,
                 priority = ReturnList.priority,
@@ -52,7 +52,7 @@ namespace toDoList.Api.Controllers
         }
 
         [HttpPatch("{id}", Name = "Patch")]
-        public IActionResult PartiallyUpdate(int id, [FromBody] toDoListDto returnList)
+        public IActionResult PartiallyUpdate(int id, [FromBody] Models.toDoList returnList)
         {
             var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
             
