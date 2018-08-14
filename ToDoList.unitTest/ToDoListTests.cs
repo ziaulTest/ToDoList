@@ -42,8 +42,8 @@ namespace ToDoList.unitTest
         [Test]
         public void Then3ItemsAreReturned()
         {
-            var res = result as OkNegotiatedContentResult<ToDoListDataStore>;
-            var count = res.Content.ToDoList.Count;
+           var toDoListItemses = (result as OkObjectResult).Value as List<toDoListItems>;
+           var count = toDoListItemses.Count;
 
             Assert.AreEqual(3,count);
 
@@ -86,21 +86,10 @@ namespace ToDoList.unitTest
                 task = "do this test"
             });
 
-            var res = Post as CreatedAtRouteNegotiatedContentResult<toDoListItems>;
-            var id = res.Content.Id;
-           // Assert.Contains();
+           Assert.IsInstanceOf<CreatedAtRouteResult>(Post);
 
-        }
+            //var res = Post as CreatedAtRouteNegotiatedContentResult<toDoListItems>;
 
-        [Test]
-        public void Be_able_to_Delete_an_Item()
-        {
-            var Controller = new ToDoListController();
-            var Delete = Controller.DeleteList(1);
-
-            var deleted = Delete as NoContentResult;
-
-            Assert.IsNotNull(deleted);
 
         }
 
@@ -111,6 +100,15 @@ namespace ToDoList.unitTest
             //var Patch = controller.PartiallyUpdate(1)
             
         }
+
+        [Test]
+        public void Be_able_to_Delete_an_Item()
+        {
+            var Controller = new ToDoListController();
+            var Delete = Controller.DeleteList(1);
+            Assert.IsInstanceOf<NoContentResult>(Delete);
+        }
+
 
 
     }
