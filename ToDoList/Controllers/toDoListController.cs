@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using toDoList.Api.Models;
+using ToDoList.Models;
 
-namespace toDoList.Api.Controllers
+namespace ToDoList.Controllers
 {
     [Route("api/ToDoLists")]
     public class ToDoListController : Controller
@@ -32,14 +29,14 @@ namespace toDoList.Api.Controllers
         }
 
         [HttpPost("{id}", Name = "Post")]
-        public IActionResult PostToDoList([FromBody] Models.toDoList ReturnList)
+        public IActionResult PostToDoList([FromBody] toDoListItems ReturnList)
         {
             if (ReturnList == null)
             {
                 return BadRequest();
             }
 
-            var final = new Models.toDoList()
+            var final = new toDoListItems()
             {
                 Id = ReturnList.Id,
                 priority = ReturnList.priority,
@@ -52,7 +49,7 @@ namespace toDoList.Api.Controllers
         }
 
         [HttpPatch("{id}", Name = "Patch")]
-        public IActionResult PartiallyUpdate(int id, [FromBody] Models.toDoList returnList)
+        public IActionResult PartiallyUpdate(int id, [FromBody] toDoListItems returnList)
         {
             var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
             

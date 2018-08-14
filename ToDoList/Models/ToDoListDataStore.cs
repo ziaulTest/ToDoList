@@ -1,35 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace toDoList.Api.Models
+namespace ToDoList.Models
 {
     public class ToDoListDataStore
     {
         public static ToDoListDataStore Current { get; set; } = new ToDoListDataStore();
 
-        public List<toDoList> ToDoList { get; set; }
+        public List<toDoListItems> ToDoList { get; set; }
 
         public ToDoListDataStore()
         {
-            ToDoList = new List<toDoList>()
+            ToDoList = new List<toDoListItems>()
             {
-                new toDoList()
+                new toDoListItems()
                 {
                     Id = 1,
                     priority = "high",
                     task = "Wake up at 9am",
                     status = "In Progress",
                 },
-                new toDoList()
+                new toDoListItems()
                 {
                     Id = 2,
                     priority = "low",
                     task = "sleep at 8pm",
                     status = "In Progress"
                 },
-                new toDoList()
+                new toDoListItems()
                 {
                     Id = 3,
                     priority = "middle",

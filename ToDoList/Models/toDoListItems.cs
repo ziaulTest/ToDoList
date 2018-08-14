@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace toDoList.Api.Models
+﻿namespace ToDoList.Models
 {
-    public class toDoList
+    public class toDoListItems
     {
+
         public int Id { get; set; }
         public string task { get; set; }  
         public string priority { get; set; }
