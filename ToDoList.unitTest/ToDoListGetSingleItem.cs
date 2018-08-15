@@ -7,7 +7,7 @@ using ToDoList.Controllers;
 
 namespace ToDoList.unitTest
 {
-    class ToDoListGetSingleItem
+   public class ToDoListGetSingleItem
     {
 
         [TestFixture]

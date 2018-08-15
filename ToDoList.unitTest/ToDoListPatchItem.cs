@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web.Http.Results;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using ToDoList.Controllers;
 using ToDoList.Models;
+using OkResult = Microsoft.AspNetCore.Mvc.OkResult;
 
 namespace ToDoList.unitTest
 {
-    class ToDoListPatchItem
+  public class ToDoListPatchItem
     {
 
 
@@ -35,6 +37,11 @@ namespace ToDoList.unitTest
             public void Then_The_Item_Is_updated()
             {
                 Assert.IsNotNull(result);
+            }
+
+            [Test]
+            public void Then_The_Post_Conatins_The_Values()
+            {
             }
         }
     }
