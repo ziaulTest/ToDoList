@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using ToDoList.Controllers;
 using ToDoList.Models;
 using NotFoundResult = Microsoft.AspNetCore.Mvc.NotFoundResult;
+using OkObjectResult = Microsoft.AspNetCore.Mvc.OkObjectResult;
 using OkResult = System.Web.Http.Results.OkResult;
 
 
@@ -44,9 +45,8 @@ namespace ToDoList.unitTest
         {
            var toDoListItemses = (result as OkObjectResult).Value as List<toDoListItems>;
            var count = toDoListItemses.Count;
-
-            Assert.AreEqual(3,count);
-
+            
+           Assert.AreEqual(3,count);
         }
 
         [Test]
@@ -75,8 +75,6 @@ namespace ToDoList.unitTest
         [Test]
         public void Be_able_to_Post_an_Item()
         {
-         
-            
             var Controller = new ToDoListController();
             var Post = Controller.PostToDoList(new toDoListItems
             {
@@ -87,18 +85,23 @@ namespace ToDoList.unitTest
             });
 
            Assert.IsInstanceOf<CreatedAtRouteResult>(Post);
-
-            //var res = Post as CreatedAtRouteNegotiatedContentResult<toDoListItems>;
-
-
         }
 
         [Test]
         public void Be_able_to_Patch_an_Item()
         {
             var controller = new ToDoListController();
-            //var Patch = controller.PartiallyUpdate(1)
-            
+
+            var todolist = new toDoListItems
+            {
+                    Id = 1,
+                    priority = "updated priority",
+                    task =  "updated task"
+            };
+            var res = controller.PartiallyUpdate(todolist.Id, todolist);
+          
+            Assert.IsNotNull(res);
+
         }
 
         [Test]
@@ -108,9 +111,6 @@ namespace ToDoList.unitTest
             var Delete = Controller.DeleteList(1);
             Assert.IsInstanceOf<NoContentResult>(Delete);
         }
-
-
-
     }
 
 }
