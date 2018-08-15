@@ -81,18 +81,13 @@ namespace ToDoList.unitTest
                 var Controller = new ToDoListController();
 
                 result = Controller.GetToDoList(50);
-
             }
 
             [Test]
             public void ToDoList_Not_Found()
             {
-                var Actual = typeof(NotFoundResult);
-
-                Assert.IsInstanceOf<IActionResult>(result);
-                Assert.IsInstanceOf(Actual, result);
+                Assert.IsInstanceOf<NotFoundResult>(result);
             }
-
         }
 
 
@@ -140,9 +135,8 @@ namespace ToDoList.unitTest
             [Test]
             public void Then_The_Task_Is_Deleted()
             {
-                var Controller = new ToDoListController();
-                var Delete = Controller.DeleteList(1);
-                Assert.IsInstanceOf<NoContentResult>(Delete);
+
+                Assert.IsInstanceOf<NoContentResult>(result);
             }
         }
 
