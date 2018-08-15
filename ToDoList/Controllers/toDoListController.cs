@@ -25,7 +25,6 @@ namespace ToDoList.Controllers
             }
 
             return Ok(listToReturn);
-            
         }
 
         [HttpPost("{id}", Name = "Post")]
@@ -77,7 +76,6 @@ namespace ToDoList.Controllers
             ToDoListDataStore.Current.ToDoList.Remove(toDoListItem);
 
             return NoContent();
-
         }
     }
 }
