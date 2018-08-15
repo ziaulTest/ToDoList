@@ -38,9 +38,6 @@ namespace ToDoList.unitTest
                 
 
                 Assert.AreNotEqual(1,IdtoFind);
-                
-
-
             }
         }
     }
