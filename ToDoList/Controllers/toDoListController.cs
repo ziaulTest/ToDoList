@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using ToDoList.Interface;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers
@@ -7,23 +9,33 @@ namespace ToDoList.Controllers
     [Route("api/ToDoLists")]
     public class ToDoListController : Controller
     {
+        private readonly IToDoRepository toDoLisToDoRepository;
+
+        public ToDoListController()
+        {
+        }
+        public ToDoListController(IToDoRepository toDoLisToDoRepository)
+        {
+            this.toDoLisToDoRepository = toDoLisToDoRepository;
+        }
 
         [HttpGet]
         public IActionResult GetToDoLists()
         {
+            //return Ok(toDoLisToDoRepository.GetListDataStores().Count);
             return Ok(ToDoListDataStore.Current.ToDoList);
         }
 
         [HttpGet("{id}", Name = "Get")]
         public IActionResult GetToDoList(int id)
         {
+            //var listToReturn = toDoLisToDoRepository.GetListDataStores().FirstOrDefault(l => l.Id == id);
             // find list 
-            var listToReturn = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
+             var listToReturn = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
             if (listToReturn == null)
             {
                 return NotFound();
             }
-
             return Ok(listToReturn);
         }
 

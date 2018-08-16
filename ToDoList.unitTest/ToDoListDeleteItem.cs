@@ -19,6 +19,7 @@ namespace ToDoList.unitTest
             [SetUp]
             public void WhenTryingtoDeleteATask()
             {
+                var controller = new ToDoListController();
                 var Controller = new ToDoListController();
 
                 result = Controller.DeleteList(1);
@@ -33,11 +34,10 @@ namespace ToDoList.unitTest
             [Test]
             public void Then_The_Specified_List_Is_Checked_For_Deleation()
             {
-                var toDoListItems = new ToDoListDataStore();
-                var IdtoFind = toDoListItems.ToDoList.Find(x => x.Id == 1);
-                
+                var toDoListItems = ToDoListDataStore.Current.ToDoList;
+                var IdtoFind = toDoListItems.Find(x => x.Id == 1);
 
-                Assert.AreNotEqual(1,IdtoFind);
+                Assert.IsNotNull(IdtoFind);
             }
         }
     }
