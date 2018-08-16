@@ -11,9 +11,6 @@ namespace ToDoList.Controllers
     {
         private readonly IToDoRepository toDoLisToDoRepository;
 
-        public ToDoListController()
-        {
-        }
         public ToDoListController(IToDoRepository toDoLisToDoRepository)
         {
             this.toDoLisToDoRepository = toDoLisToDoRepository;
@@ -22,16 +19,16 @@ namespace ToDoList.Controllers
         [HttpGet]
         public IActionResult GetToDoLists()
         {
-            //return Ok(toDoLisToDoRepository.GetListDataStores().Count);
-            return Ok(ToDoListDataStore.Current.ToDoList);
+          return  Ok(toDoLisToDoRepository.GetListDataStores());
+          //return Ok(ToDoListDataStore.Current.ToDoList);
         }
 
         [HttpGet("{id}", Name = "Get")]
         public IActionResult GetToDoList(int id)
         {
-            //var listToReturn = toDoLisToDoRepository.GetListDataStores().FirstOrDefault(l => l.Id == id);
+            var listToReturn = toDoLisToDoRepository.GetById(id);
             // find list 
-             var listToReturn = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
+            // var listToReturn = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
             if (listToReturn == null)
             {
                 return NotFound();
