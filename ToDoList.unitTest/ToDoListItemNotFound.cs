@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using ToDoList.Controllers;
+using ToDoList.Interface;
 using ToDoList.Models;
 
 namespace ToDoList.unitTest
@@ -14,11 +15,13 @@ namespace ToDoList.unitTest
         public class GivenATaskForAToDoListThatDoesNotExsist
         {
             IActionResult result;
+       
 
             [SetUp]
             public void WhenTryingtoCallATask()
             {
-                var Controller = new ToDoListController();
+
+                var Controller = new ToDoListController(new ToDoRepository());
 
                 result = Controller.GetToDoList(50);
             }
@@ -34,10 +37,11 @@ namespace ToDoList.unitTest
             {
                 IActionResult result;
 
+
                 [SetUp]
                 public void WhenTryingtoCallanInvalidTask()
                 {
-                    var Controller = new ToDoListController();
+                    var Controller = new ToDoListController(new ToDoRepository());
                     result = Controller.GetToDoLists();
                 }
 

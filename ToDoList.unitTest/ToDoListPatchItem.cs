@@ -5,6 +5,7 @@ using System.Web.Http.Results;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using ToDoList.Controllers;
+using ToDoList.Interface;
 using ToDoList.Models;
 using OkResult = Microsoft.AspNetCore.Mvc.OkResult;
 
@@ -22,7 +23,7 @@ namespace ToDoList.unitTest
             [SetUp]
             public void WhenTryingtoUpdateATask()
             {
-                var Controller = new ToDoListController();
+                var Controller = new ToDoListController(new ToDoRepository());
                 var todolist = new toDoListItems
                 {
                     Id = 1,

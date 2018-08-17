@@ -20,7 +20,6 @@ namespace ToDoList.Controllers
         public IActionResult GetToDoLists()
         {
           return  Ok(toDoLisToDoRepository.GetListDataStores());
-          //return Ok(ToDoListDataStore.Current.ToDoList);
         }
 
         [HttpGet("{id}", Name = "Get")]
@@ -28,7 +27,6 @@ namespace ToDoList.Controllers
         {
             var listToReturn = toDoLisToDoRepository.GetById(id);
             // find list 
-            // var listToReturn = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
             if (listToReturn == null)
             {
                 return NotFound();
@@ -44,16 +42,8 @@ namespace ToDoList.Controllers
                 return BadRequest();
             }
 
-            var final = new toDoListItems()
-            {
-                Id = ReturnList.Id,
-                priority = ReturnList.priority,
-                status = ReturnList.status,
-                task = ReturnList.task
-            };
-
-            ToDoListDataStore.Current.ToDoList.Add(final);
-            return CreatedAtRoute("Get", final);
+            toDoLisToDoRepository.InsertToDoList(ReturnList);
+            return CreatedAtRoute("Get", ReturnList);
         }
 
         [HttpPatch("{id}", Name = "Patch")]
@@ -75,15 +65,7 @@ namespace ToDoList.Controllers
         [HttpDelete("{id}" , Name = "Delete")]
         public IActionResult DeleteList(int id)
         {
-            var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
-
-            if (toDoListItem == null)
-            {
-                return NotFound();
-            }
-
-            ToDoListDataStore.Current.ToDoList.Remove(toDoListItem);
-
+            toDoLisToDoRepository.DeleteById(id);
             return NoContent();
         }
     }

@@ -8,6 +8,7 @@ using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using ToDoList.Controllers;
+using ToDoList.Interface;
 using ToDoList.Models;
 using NotFoundResult = Microsoft.AspNetCore.Mvc.NotFoundResult;
 using OkObjectResult = Microsoft.AspNetCore.Mvc.OkObjectResult;
@@ -20,12 +21,14 @@ namespace ToDoList.unitTest
     public class GivenTasksForAToDoList
     {
         IActionResult result;
+      
 
         [SetUp]
         public void WhenGetToDoListsIsCalled()
         {
+
             //Arrange
-            var Controller = new ToDoListController();
+            var Controller = new ToDoListController(new ToDoRepository());
             //Act 
             result = Controller.GetToDoLists();
         }

@@ -20,7 +20,15 @@ namespace ToDoList.Interface
 
         public void InsertToDoList(toDoListItems toDoListItems)
         {
-            throw new NotImplementedException();
+            var final = new toDoListItems()
+            {
+                Id = toDoListItems.Id,
+                priority = toDoListItems.priority,
+                status = toDoListItems.status,
+                task = toDoListItems.task
+            };
+
+           ToDoListDataStore.Current.ToDoList.Add(final);
         }
 
         public void DeleteById(int id)

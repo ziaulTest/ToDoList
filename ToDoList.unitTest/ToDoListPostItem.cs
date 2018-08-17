@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using ToDoList.Controllers;
+using ToDoList.Interface;
 using ToDoList.Models;
 
 namespace ToDoList.unitTest
@@ -15,11 +16,11 @@ namespace ToDoList.unitTest
         public class GivenATaskWhichsNeedsToBeCreated
         {
             IActionResult result;
-
+          
             [SetUp]
             public void WhenTheTaskDoesNotYetExsist()
             {
-                var Controller = new ToDoListController();
+                var Controller = new ToDoListController(new ToDoRepository());
 
                 result = Controller.PostToDoList(new toDoListItems
                 {
