@@ -34,7 +34,6 @@ namespace ToDoList.unitTest
                 var fake = todoMock.Object;
 
                 var controller = new ToDoListController(fake);
-
                 result = controller.PartiallyUpdate(todolist.Id, todolist);
             }
 
