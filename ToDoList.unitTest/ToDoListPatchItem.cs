@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.Http.Results;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using NUnit.Framework;
 using ToDoList.Controllers;
+using ToDoList.Interface;
 using ToDoList.Models;
 using OkResult = Microsoft.AspNetCore.Mvc.OkResult;
 
@@ -12,8 +14,6 @@ namespace ToDoList.unitTest
 {
   public class ToDoListPatchItem
     {
-
-
         [TestFixture]
         public class GivenATaskForAToDoListThatNeedsToBeUpdated
         {
@@ -22,7 +22,6 @@ namespace ToDoList.unitTest
             [SetUp]
             public void WhenTryingtoUpdateATask()
             {
-                var Controller = new ToDoListController();
                 var todolist = new toDoListItems
                 {
                     Id = 1,
@@ -30,7 +29,12 @@ namespace ToDoList.unitTest
                     task = "updated task"
                 };
 
-                result = Controller.PartiallyUpdate(todolist.Id, todolist);
+                var todoMock = new Mock<IToDoRepository>();
+                todoMock.Setup(x => x.UpdateToDoList(todolist.Id, todolist));
+                var fake = todoMock.Object;
+
+                var controller = new ToDoListController(fake);
+                result = controller.PartiallyUpdate(todolist.Id, todolist);
             }
 
             [Test]

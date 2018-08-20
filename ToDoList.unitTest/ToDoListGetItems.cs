@@ -8,6 +8,7 @@ using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using ToDoList.Controllers;
+using ToDoList.Interface;
 using ToDoList.Models;
 using NotFoundResult = Microsoft.AspNetCore.Mvc.NotFoundResult;
 using OkObjectResult = Microsoft.AspNetCore.Mvc.OkObjectResult;
@@ -20,14 +21,44 @@ namespace ToDoList.unitTest
     public class GivenTasksForAToDoList
     {
         IActionResult result;
+      
 
         [SetUp]
         public void WhenGetToDoListsIsCalled()
         {
             //Arrange
-            var Controller = new ToDoListController();
+            var todoMock = new Mock<IToDoRepository>();
+           
+            var fakeList = new List<toDoListItems>
+            {
+                new toDoListItems()
+                {
+                    Id = 1,
+                    priority = "high",
+                    status = "started",
+                    task = "complete this test"
+                },
+                new toDoListItems()
+                {
+                    Id = 2,
+                    priority = "high",
+                    status = "started",
+                    task = "complete this test2222"
+                },
+                new toDoListItems()
+                {
+                    Id = 3,
+                    priority = "low",
+                    status = "done",
+                    task = "complete this test3333"
+                }
+            };
+
+            todoMock.Setup(x => x.GetListDataStores()).Returns(fakeList);
+            var fake = todoMock.Object;
+            var controller = new ToDoListController(fake);
             //Act 
-            result = Controller.GetToDoLists();
+            result = controller.GetToDoLists();
         }
 
         [Test]

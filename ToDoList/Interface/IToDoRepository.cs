@@ -15,6 +15,6 @@ namespace ToDoList.Interface
 
         void DeleteById(int id);
 
-        void UpdateToDoList(toDoListItems toDoListItems);
+        void UpdateToDoList(int id,toDoListItems toDoListItems);
     }
 }

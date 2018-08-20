@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using NUnit.Framework;
 using ToDoList.Controllers;
+using ToDoList.Interface;
+using ToDoList.Models;
 
 namespace ToDoList.unitTest
 {
@@ -18,11 +21,21 @@ namespace ToDoList.unitTest
             [SetUp]
             public void WhenCallingAsingleToDoList()
             {
-                var Controller = new ToDoListController();
+                var todoMock = new Mock<IToDoRepository>();
+                todoMock.Setup(x => x.GetById(1)).Returns(new toDoListItems
+                {
+                    Id = 1,
+                    priority = "High",
+                    status = "Complete",
+                    task = "Test this Moq"
+                });
 
-                result = Controller.GetToDoList(1);
+                var fake = todoMock.Object;
+                var controller = new ToDoListController(fake);
+
+                result = controller.GetToDoList(1);
             }
-
+            
             [Test]
             public void Then_A_Sinlge_Item_Is_Returned()
             {
@@ -30,6 +43,7 @@ namespace ToDoList.unitTest
 
                 Assert.IsNotNull(okObjectResult.Value);
             }
+
         }
 
     }

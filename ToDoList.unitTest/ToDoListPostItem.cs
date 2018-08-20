@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using NUnit.Framework;
 using ToDoList.Controllers;
+using ToDoList.Interface;
 using ToDoList.Models;
 
 namespace ToDoList.unitTest
@@ -15,19 +17,24 @@ namespace ToDoList.unitTest
         public class GivenATaskWhichsNeedsToBeCreated
         {
             IActionResult result;
-
+          
             [SetUp]
             public void WhenTheTaskDoesNotYetExsist()
             {
-                var Controller = new ToDoListController();
-
-                result = Controller.PostToDoList(new toDoListItems
+                var todolist = new toDoListItems
                 {
                     Id = 4,
                     priority = "high",
                     status = "Done",
                     task = "do this test"
-                });
+                };
+                var todoMock = new Mock<IToDoRepository>();
+                todoMock.Setup(x => x.InsertToDoList(todolist));
+                var fake = todoMock.Object;
+
+                var controller = new ToDoListController(fake);
+
+                result = controller.PostToDoList(todolist);
             }
 
             [Test]
