@@ -37,9 +37,21 @@ namespace ToDoList.Interface
             ToDoListDataStore.Current.ToDoList.Remove(toDoListItem);
         }
 
-        public void UpdateToDoList(toDoListItems toDoListItems)
+        public void UpdateToDoList(int id,toDoListItems toDoListItems)
         {
-            throw new NotImplementedException();
+            var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
+
+            try
+            {
+                toDoListItem.task = toDoListItems.task;
+                toDoListItem.priority = toDoListItems.priority;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

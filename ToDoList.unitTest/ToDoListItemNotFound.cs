@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using NUnit.Framework;
 using ToDoList.Controllers;
 using ToDoList.Interface;
@@ -15,13 +16,16 @@ namespace ToDoList.unitTest
         public class GivenATaskForAToDoListThatDoesNotExsist
         {
             IActionResult result;
-       
+
 
             [SetUp]
             public void WhenTryingtoCallATask()
             {
+                var todoMock = new Mock<IToDoRepository>();
 
-                var Controller = new ToDoListController(new ToDoRepository());
+                todoMock.Setup(x => x.GetById(50));
+                var fake = todoMock.Object;
+                var Controller = new ToDoListController(fake);
 
                 result = Controller.GetToDoList(50);
             }
@@ -32,30 +36,11 @@ namespace ToDoList.unitTest
                 Assert.IsInstanceOf<NotFoundResult>(result);
             }
 
-            [TestFixture]
-            public class GivenATaskForAToDoListThatDoesNotExsista
+            [Test]
+            public void Then_Check_If_Object_IsNot_Found()
             {
-                IActionResult result;
-
-
-                [SetUp]
-                public void WhenTryingtoCallanInvalidTask()
-                {
-                    var Controller = new ToDoListController(new ToDoRepository());
-                    result = Controller.GetToDoLists();
-                }
-
-                [Test]
-                public void ToDoListNotFoundWithinDatastore()
-                {
-                    var toDoListItemses = (result as OkObjectResult).Value as List<toDoListItems>;
-                    var count = toDoListItemses.Count;
-
-                    Assert.AreNotEqual(50, count);
-                }
-
+                if (result is OkObjectResult okObjectResult) Assert.IsNull(okObjectResult.Value);
             }
-            
         }
     }
 }

@@ -49,16 +49,13 @@ namespace ToDoList.Controllers
         [HttpPatch("{id}", Name = "Patch")]
         public IActionResult PartiallyUpdate(int id, [FromBody] toDoListItems returnList)
         {
-            var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
+           toDoLisToDoRepository.UpdateToDoList( id,returnList);
             
-            if (toDoListItem == null)
+            if (toDoLisToDoRepository == null)
             {
                 return BadRequest();
             }
 
-            toDoListItem.task = returnList.task;
-            toDoListItem.priority = returnList.priority;
-            
             return Ok();
         }
 

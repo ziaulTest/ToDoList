@@ -31,11 +31,11 @@ namespace ToDoList.unitTest
                 });
 
                 var fake = todoMock.Object;
-                var Controller = new ToDoListController(fake);
+                var controller = new ToDoListController(fake);
 
-                result = Controller.GetToDoList(1);
+                result = controller.GetToDoList(1);
             }
-
+            
             [Test]
             public void Then_A_Sinlge_Item_Is_Returned()
             {
@@ -43,6 +43,7 @@ namespace ToDoList.unitTest
 
                 Assert.IsNotNull(okObjectResult.Value);
             }
+
         }
 
     }

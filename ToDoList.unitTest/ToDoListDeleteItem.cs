@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
+using Moq.Language;
 using NUnit.Framework;
 using ToDoList.Controllers;
 using ToDoList.Interface;
@@ -16,16 +18,23 @@ namespace ToDoList.unitTest
         public class GivenATaskWhichNeedsToBeDeleted
         {
             IActionResult result;
-         
+           
+           
 
             [SetUp]
             public void WhenTryingtoDeleteATask()
             {
+                var todomock = new Mock<IToDoRepository>();
+                
+                todomock.Setup(x => x.DeleteById(1));
 
-                var Controller = new ToDoListController(new ToDoRepository());
-
+                var fake = todomock.Object;
+                
+                var Controller = new ToDoListController(fake);
                 result = Controller.DeleteList(1);
-            }
+
+              // todomock.Verify(r=>r.DeleteById(1));
+             }
 
             [Test]
             public void Then_The_Task_Is_Deleted()
@@ -36,10 +45,7 @@ namespace ToDoList.unitTest
             [Test]
             public void Then_The_Specified_List_Is_Checked_For_Deleation()
             {
-                var toDoListItems = ToDoListDataStore.Current.ToDoList;
-                var IdtoFind = toDoListItems.Find(x => x.Id == 1);
-
-                Assert.IsNotNull(IdtoFind);
+                
             }
         }
     }
