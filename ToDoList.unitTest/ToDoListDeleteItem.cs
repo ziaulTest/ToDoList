@@ -18,22 +18,17 @@ namespace ToDoList.unitTest
         public class GivenATaskWhichNeedsToBeDeleted
         {
             IActionResult result;
-           
-           
+            Mock<IToDoRepository> todomock;
 
             [SetUp]
             public void WhenTryingtoDeleteATask()
             {
-                var todomock = new Mock<IToDoRepository>();
-                
+                todomock = new Mock<IToDoRepository>();
                 todomock.Setup(x => x.DeleteById(1));
-
                 var fake = todomock.Object;
                 
-                var Controller = new ToDoListController(fake);
-                result = Controller.DeleteList(1);
-
-              // todomock.Verify(r=>r.DeleteById(1));
+                var controller = new ToDoListController(fake);
+                result = controller.DeleteList(1);
              }
 
             [Test]
@@ -45,7 +40,7 @@ namespace ToDoList.unitTest
             [Test]
             public void Then_The_Specified_List_Is_Checked_For_Deleation()
             {
-                
+                todomock.Verify(r => r.DeleteById(1));
             }
         }
     }
