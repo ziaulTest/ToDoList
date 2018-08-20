@@ -12,17 +12,16 @@ namespace ToDoList.unitTest
 {
    public class ToDoListInvalid
     {
-
         [TestFixture]
         public class GivenATaskForAToDoListThatIsInvalid
         {
             IActionResult result;
-
+            Mock<IToDoRepository> todomock;
 
             [SetUp]
             public void WhenTryingtoCallanInvalidTask()
             {
-                var todomock = new Mock<IToDoRepository>();
+                todomock = new Mock<IToDoRepository>();
                 todomock.Setup(repository => repository.GetById(50));
                 var fake = todomock.Object;
                 var Controller = new ToDoListController(fake);
@@ -35,7 +34,6 @@ namespace ToDoList.unitTest
                 if ((result as OkObjectResult).Value is List<toDoListItems> toDoListItemses)
                 {
                     var count = toDoListItemses.Count;
-
                     Assert.AreNotEqual(50, count);
                 }
             }

@@ -27,7 +27,6 @@ namespace ToDoList.Interface
                 status = toDoListItems.status,
                 task = toDoListItems.task
             };
-
            ToDoListDataStore.Current.ToDoList.Add(final);
         }
 
@@ -40,18 +39,10 @@ namespace ToDoList.Interface
         public void UpdateToDoList(int id,toDoListItems toDoListItems)
         {
             var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
-
-            try
-            {
-                toDoListItem.task = toDoListItems.task;
+            
                 toDoListItem.priority = toDoListItems.priority;
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+                toDoListItem.task = toDoListItems.task;
+            
         }
     }
 }
