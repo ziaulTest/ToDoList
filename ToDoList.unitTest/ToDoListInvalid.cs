@@ -23,22 +23,21 @@ namespace ToDoList.unitTest
             {
                 todomock = new Mock<IToDoRepository>();
                 todomock.Setup(repository => repository.GetById(50));
-                var fake = todomock.Object;
-                var Controller = new ToDoListController(fake);
+ 
+                var Controller = new ToDoListController(todomock.Object);
                 result = Controller.GetToDoLists();
             }
 
             [Test]
-            public void ToDoListNotFoundWithinDatastore()
+            public void Then_ToDoList_Is_NotFound_Within_The_Datastore()
             {
-                if ((result as OkObjectResult).Value is List<toDoListItems> toDoListItemses)
+                if ((result as OkObjectResult).Value is List<ToDoListItems> toDoListItemses)
                 {
                     var count = toDoListItemses.Count;
                     Assert.AreNotEqual(50, count);
                 }
             }
         }
-
     }
 }
 

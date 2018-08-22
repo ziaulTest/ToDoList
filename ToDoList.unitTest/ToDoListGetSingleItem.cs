@@ -17,12 +17,13 @@ namespace ToDoList.unitTest
         public class GivenATaskForAToDoList
         {
             IActionResult result;
+            Mock<IToDoRepository> todomock;
 
             [SetUp]
             public void WhenCallingAsingleToDoList()
             {
                 var todoMock = new Mock<IToDoRepository>();
-                todoMock.Setup(x => x.GetById(1)).Returns(new toDoListItems
+                todoMock.Setup(x => x.GetById(1)).Returns(new ToDoListItems
                 {
                     Id = 1,
                     priority = "High",
@@ -30,9 +31,7 @@ namespace ToDoList.unitTest
                     task = "Test this Moq"
                 });
 
-                var fake = todoMock.Object;
-                var controller = new ToDoListController(fake);
-
+                var controller = new ToDoListController(todoMock.Object);
                 result = controller.GetToDoList(1);
             }
             
@@ -40,11 +39,14 @@ namespace ToDoList.unitTest
             public void Then_A_Sinlge_Item_Is_Returned()
             {
                 var okObjectResult = result as OkObjectResult;
-
                 Assert.IsNotNull(okObjectResult.Value);
             }
 
+            [Test]
+            public void Then_A_ToDoList_Item_Is_Checked_And_Is_Returned()
+            {
+                todomock.Verify(x=> x.GetById(1));
+            }
         }
-
     }
 }

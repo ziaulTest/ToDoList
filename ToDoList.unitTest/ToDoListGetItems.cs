@@ -14,38 +14,35 @@ using NotFoundResult = Microsoft.AspNetCore.Mvc.NotFoundResult;
 using OkObjectResult = Microsoft.AspNetCore.Mvc.OkObjectResult;
 using OkResult = System.Web.Http.Results.OkResult;
 
-
 namespace ToDoList.unitTest
 {
     [TestFixture]
     public class GivenTasksForAToDoList
     {
         IActionResult result;
-      
 
         [SetUp]
         public void WhenGetToDoListsIsCalled()
         {
-            //Arrange
             var todoMock = new Mock<IToDoRepository>();
            
-            var fakeList = new List<toDoListItems>
+            var fakeList = new List<ToDoListItems>
             {
-                new toDoListItems()
+                new ToDoListItems()
                 {
                     Id = 1,
                     priority = "high",
                     status = "started",
                     task = "complete this test"
                 },
-                new toDoListItems()
+                new ToDoListItems()
                 {
                     Id = 2,
                     priority = "high",
                     status = "started",
                     task = "complete this test2222"
                 },
-                new toDoListItems()
+                new ToDoListItems()
                 {
                     Id = 3,
                     priority = "low",
@@ -55,23 +52,21 @@ namespace ToDoList.unitTest
             };
 
             todoMock.Setup(x => x.GetListDataStores()).Returns(fakeList);
-            var fake = todoMock.Object;
-            var controller = new ToDoListController(fake);
-            //Act 
+           
+            var controller = new ToDoListController(todoMock.Object);
             result = controller.GetToDoLists();
         }
 
         [Test]
         public void ThenAnOKResultIsReturned()
         {
-            //assert
             Assert.IsNotNull(result as OkObjectResult);
         }
 
         [Test]
         public void Then3ItemsAreReturned()
         {
-            var toDoListItemses = (result as OkObjectResult).Value as List<toDoListItems>;
+            var toDoListItemses = (result as OkObjectResult).Value as List<ToDoListItems>;
             var count = toDoListItemses.Count;
 
             Assert.AreEqual(3, count);

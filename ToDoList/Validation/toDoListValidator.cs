@@ -8,7 +8,7 @@ using ToDoList.Models;
 
 namespace ToDoList.Validation
 {
-    public class ToDoListValidator : AbstractValidator<toDoListItems>
+    public class ToDoListValidator : AbstractValidator<ToDoListItems>
     {
         public ToDoListValidator()
         {
