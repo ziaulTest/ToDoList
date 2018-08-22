@@ -20,7 +20,6 @@ namespace ToDoList.unitTest
                 todomock = new Mock<IToDoRepository>();
                 todomock.Setup(x => x.DeleteById(1));
               
-                
                 var controller = new ToDoListController(todomock.Object);
                 result = controller.DeleteList(1);
              }

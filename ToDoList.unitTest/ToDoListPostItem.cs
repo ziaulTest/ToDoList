@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using ToDoList.Controllers;
@@ -30,10 +26,8 @@ namespace ToDoList.unitTest
                 };
                 var todoMock = new Mock<IToDoRepository>();
                 todoMock.Setup(x => x.InsertToDoList(todolist));
-                var fake = todoMock.Object;
 
-                var controller = new ToDoListController(fake);
-
+                var controller = new ToDoListController(todoMock.Object);
                 result = controller.PostToDoList(todolist);
             }
 
@@ -56,7 +50,6 @@ namespace ToDoList.unitTest
             {
                 var toDoListItemses = result as CreatedAtRouteResult;
                 var routeName = toDoListItemses.RouteName;
-
                 Assert.AreSame("Get", routeName);
             }
         }

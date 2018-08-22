@@ -14,20 +14,16 @@ using NotFoundResult = Microsoft.AspNetCore.Mvc.NotFoundResult;
 using OkObjectResult = Microsoft.AspNetCore.Mvc.OkObjectResult;
 using OkResult = System.Web.Http.Results.OkResult;
 
-
 namespace ToDoList.unitTest
 {
     [TestFixture]
     public class GivenTasksForAToDoList
     {
         IActionResult result;
-       
-
 
         [SetUp]
         public void WhenGetToDoListsIsCalled()
         {
-            //Arrange
             var todoMock = new Mock<IToDoRepository>();
            
             var fakeList = new List<ToDoListItems>
@@ -58,14 +54,12 @@ namespace ToDoList.unitTest
             todoMock.Setup(x => x.GetListDataStores()).Returns(fakeList);
            
             var controller = new ToDoListController(todoMock.Object);
-            //Act 
             result = controller.GetToDoLists();
         }
 
         [Test]
         public void ThenAnOKResultIsReturned()
         {
-            //assert
             Assert.IsNotNull(result as OkObjectResult);
         }
 

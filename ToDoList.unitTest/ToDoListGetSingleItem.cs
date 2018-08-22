@@ -39,12 +39,11 @@ namespace ToDoList.unitTest
             public void Then_A_Sinlge_Item_Is_Returned()
             {
                 var okObjectResult = result as OkObjectResult;
-
                 Assert.IsNotNull(okObjectResult.Value);
             }
 
             [Test]
-            public void Then_A_ToDoList_Item_Is_Checked_It_Has_Been_Returned()
+            public void Then_A_ToDoList_Item_Is_Checked_And_Is_Returned()
             {
                 todomock.Verify(x=> x.GetById(1));
             }
