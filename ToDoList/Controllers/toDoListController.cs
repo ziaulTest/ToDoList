@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ToDoList.Interface;
 using ToDoList.Models;
 
@@ -10,7 +8,6 @@ namespace ToDoList.Controllers
     public class ToDoListController : Controller
     {
         private readonly IToDoRepository toDoLisToDoRepository;
-
         public ToDoListController(IToDoRepository toDoLisToDoRepository)
         {
             this.toDoLisToDoRepository = toDoLisToDoRepository;
@@ -26,16 +23,17 @@ namespace ToDoList.Controllers
         public IActionResult GetToDoList(int id)
         {
             var listToReturn = toDoLisToDoRepository.GetById(id);
-            // find list 
+
             if (listToReturn == null)
             {
                 return NotFound();
             }
+
             return Ok(listToReturn);
         }
 
         [HttpPost("{id}", Name = "Post")]
-        public IActionResult PostToDoList([FromBody] toDoListItems ReturnList)
+        public IActionResult PostToDoList([FromBody] ToDoListItems ReturnList)
         {
             if (ReturnList == null)
             {
@@ -47,7 +45,7 @@ namespace ToDoList.Controllers
         }
 
         [HttpPatch("{id}", Name = "Patch")]
-        public IActionResult PartiallyUpdate(int id, [FromBody] toDoListItems returnList)
+        public IActionResult PartiallyUpdate(int id, [FromBody] ToDoListItems returnList)
         {
            toDoLisToDoRepository.UpdateToDoList( id,returnList);
             

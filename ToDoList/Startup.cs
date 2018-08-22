@@ -25,6 +25,7 @@ namespace ToDoList
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
             services.AddSingleton<IToDoRepository, ToDoRepository>();
         }
 

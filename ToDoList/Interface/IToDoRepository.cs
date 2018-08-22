@@ -7,14 +7,14 @@ namespace ToDoList.Interface
 {
     public interface IToDoRepository
     {
-        List<toDoListItems> GetListDataStores();
+        List<ToDoListItems> GetListDataStores();
 
-        toDoListItems GetById(int id);
+        ToDoListItems GetById(int id);
 
-        void InsertToDoList(toDoListItems toDoListItems);
+        void InsertToDoList(ToDoListItems toDoListItems);
 
         void DeleteById(int id);
 
-        void UpdateToDoList(int id,toDoListItems toDoListItems);
+        void UpdateToDoList(int id,ToDoListItems toDoListItems);
     }
 }

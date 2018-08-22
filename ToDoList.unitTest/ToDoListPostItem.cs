@@ -21,7 +21,7 @@ namespace ToDoList.unitTest
             [SetUp]
             public void WhenTheTaskDoesNotYetExsist()
             {
-                var todolist = new toDoListItems
+                var todolist = new ToDoListItems
                 {
                     Id = 4,
                     priority = "high",

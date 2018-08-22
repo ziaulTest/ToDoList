@@ -21,7 +21,8 @@ namespace ToDoList.unitTest
     public class GivenTasksForAToDoList
     {
         IActionResult result;
-      
+       
+
 
         [SetUp]
         public void WhenGetToDoListsIsCalled()
@@ -29,23 +30,23 @@ namespace ToDoList.unitTest
             //Arrange
             var todoMock = new Mock<IToDoRepository>();
            
-            var fakeList = new List<toDoListItems>
+            var fakeList = new List<ToDoListItems>
             {
-                new toDoListItems()
+                new ToDoListItems()
                 {
                     Id = 1,
                     priority = "high",
                     status = "started",
                     task = "complete this test"
                 },
-                new toDoListItems()
+                new ToDoListItems()
                 {
                     Id = 2,
                     priority = "high",
                     status = "started",
                     task = "complete this test2222"
                 },
-                new toDoListItems()
+                new ToDoListItems()
                 {
                     Id = 3,
                     priority = "low",
@@ -55,8 +56,8 @@ namespace ToDoList.unitTest
             };
 
             todoMock.Setup(x => x.GetListDataStores()).Returns(fakeList);
-            var fake = todoMock.Object;
-            var controller = new ToDoListController(fake);
+           
+            var controller = new ToDoListController(todoMock.Object);
             //Act 
             result = controller.GetToDoLists();
         }
@@ -71,7 +72,7 @@ namespace ToDoList.unitTest
         [Test]
         public void Then3ItemsAreReturned()
         {
-            var toDoListItemses = (result as OkObjectResult).Value as List<toDoListItems>;
+            var toDoListItemses = (result as OkObjectResult).Value as List<ToDoListItems>;
             var count = toDoListItemses.Count;
 
             Assert.AreEqual(3, count);

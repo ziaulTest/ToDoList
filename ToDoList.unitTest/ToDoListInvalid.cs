@@ -31,7 +31,7 @@ namespace ToDoList.unitTest
             [Test]
             public void ToDoListNotFoundWithinDatastore()
             {
-                if ((result as OkObjectResult).Value is List<toDoListItems> toDoListItemses)
+                if ((result as OkObjectResult).Value is List<ToDoListItems> toDoListItemses)
                 {
                     var count = toDoListItemses.Count;
                     Assert.AreNotEqual(50, count);

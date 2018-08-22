@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Moq.Language;
 using NUnit.Framework;
 using ToDoList.Controllers;
 using ToDoList.Interface;
-using ToDoList.Models;
 
 namespace ToDoList.unitTest
 {
@@ -25,9 +19,9 @@ namespace ToDoList.unitTest
             {
                 todomock = new Mock<IToDoRepository>();
                 todomock.Setup(x => x.DeleteById(1));
-                var fake = todomock.Object;
+              
                 
-                var controller = new ToDoListController(fake);
+                var controller = new ToDoListController(todomock.Object);
                 result = controller.DeleteList(1);
              }
 
