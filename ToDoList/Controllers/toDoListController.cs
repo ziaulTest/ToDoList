@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.ApplicationInsights;
+using Microsoft.AspNetCore.Mvc;
 using ToDoList.Interface;
 using ToDoList.Models;
 
@@ -16,18 +18,36 @@ namespace ToDoList.Controllers
         [HttpGet]
         public IActionResult GetToDoLists()
         {
-          return  Ok(toDoLisToDoRepository.GetListDataStores());
+            var telemetry = new Microsoft.ApplicationInsights.TelemetryClient
+            {
+                InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
+            };
+            try
+            {
+                return Ok(toDoLisToDoRepository.GetListDataStores());
+            }
+            catch (Exception e)
+            {
+               telemetry.TrackEvent(e.Message); 
+                throw;
+            }
         }
 
         [HttpGet("{id}", Name = "Get")]
         public IActionResult GetToDoList(int id)
         {
+            var telemetry = new Microsoft.ApplicationInsights.TelemetryClient
+            {
+                InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
+            };
             var listToReturn = toDoLisToDoRepository.GetById(id);
+            MetricsTracker tracker = new MetricsTracker(telemetry);
 
             if (listToReturn == null)
             {
+                tracker.Customlog();
                 return NotFound();
-            }
+             }
 
             return Ok(listToReturn);
         }

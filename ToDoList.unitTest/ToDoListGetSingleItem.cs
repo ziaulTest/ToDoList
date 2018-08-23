@@ -17,7 +17,7 @@ namespace ToDoList.unitTest
         public class GivenATaskForAToDoList
         {
             IActionResult result;
-            Mock<IToDoRepository> todomock;
+            Mock<IToDoRepository> todoMock;
 
             [SetUp]
             public void WhenCallingAsingleToDoList()
@@ -40,12 +40,6 @@ namespace ToDoList.unitTest
             {
                 var okObjectResult = result as OkObjectResult;
                 Assert.IsNotNull(okObjectResult.Value);
-            }
-
-            [Test]
-            public void Then_A_ToDoList_Item_Is_Checked_And_Is_Returned()
-            {
-                todomock.Verify(x=> x.GetById(1));
             }
         }
     }
