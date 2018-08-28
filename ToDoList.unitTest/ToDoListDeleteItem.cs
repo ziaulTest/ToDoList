@@ -31,7 +31,7 @@ namespace ToDoList.unitTest
             }
 
             [Test]
-            public void Then_The_Specified_List_Is_Checked_For_Deleation()
+            public void Then_The_Specified_List_Is_Checked_For_Deletion()
             {
                 todomock.Verify(r => r.DeleteById(1));
             }
