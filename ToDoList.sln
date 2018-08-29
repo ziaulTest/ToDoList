@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList", "ToDoList\ToDoLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.unitTest", "ToDoList.unitTest\ToDoList.unitTest.csproj", "{1629FEDD-F2A0-4A1B-887B-175EFC76363B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListServiceTests", "ToDoListServiceTests\ToDoListServiceTests.csproj", "{1C49A9A8-EF64-40C8-B781-0F532D95118C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListServiceTests", "ToDoListServiceTests\ToDoListServiceTests.csproj", "{1C49A9A8-EF64-40C8-B781-0F532D95118C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

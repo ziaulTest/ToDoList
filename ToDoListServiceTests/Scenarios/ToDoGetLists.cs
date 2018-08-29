@@ -10,8 +10,13 @@ namespace ToDoListServiceTests.Scenarios
     [TestFixture]
     public class ToDoGetLists
     {
+        private HttpClient httpClient;
+        private Uri response;
+        private Task<HttpResponseMessage> sut;
+        private string content;
+
         [Test]
-        public void Given_A_Todo_List__When_Get_Is_Called__Then_The_Response_Is__OK()
+        public void GivenATodoListWhenGetIsCalledThenTheResponseIsOK()
         {
             this.Given(_ => _.ToDoList_Is_Available())
                 .When(_ => _.The_List_Is_Called())
@@ -19,28 +24,29 @@ namespace ToDoListServiceTests.Scenarios
                 .BDDfy();
         }
 
-        private HttpClient httpClient;
-        private Uri response;
-        private Task<HttpResponseMessage> sut; 
-
         public void ToDoList_Is_Available()
         {
-            var httpClient = new HttpClient
+            this.httpClient = new HttpClient
             {
                 BaseAddress = new Uri("http://localhost:49469")
             };
-            var response = new Uri("api/ToDoLists", UriKind.Relative);
         }
 
         public void The_List_Is_Called()
         {
-            Task<HttpResponseMessage> sut = httpClient.GetAsync(response);
+            using (this.httpClient)
+            {
+                var request_uri = new Uri("api/ToDoLists", UriKind.Relative);
+
+                this.sut = httpClient.GetAsync(request_uri);
+            }
+            this.content = sut.Result.Content.ReadAsStringAsync().Result;
         }
 
         public void Response_Is_returned_With_Ok()
         {
-            var content = sut.Result.Content.ReadAsStringAsync().Result;
-            Assert.AreEqual(sut.Result.StatusCode, HttpStatusCode.OK,content);
+
+            Assert.AreEqual(sut.Result.StatusCode, HttpStatusCode.OK, content);
         }
     }
 }

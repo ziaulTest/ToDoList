@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 namespace ToDoListServiceTests
 {
+    [TestFixture]
     public class ToDoGetListServiceTest
     {
         [Test]
