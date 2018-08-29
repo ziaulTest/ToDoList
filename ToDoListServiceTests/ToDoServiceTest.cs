@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace ToDoServiceTests
+namespace ToDoListServiceTests
 {
     public class ToDoGetListServiceTest
     {
@@ -17,6 +15,7 @@ namespace ToDoServiceTests
             {
                 BaseAddress = new Uri("http://localhost:49469")
             };
+
             var response = new Uri("api/ToDoLists", UriKind.Relative);
             Task<HttpResponseMessage> sut = httpClient.GetAsync(response);
             var content = sut.Result.Content.ReadAsStringAsync().Result;
