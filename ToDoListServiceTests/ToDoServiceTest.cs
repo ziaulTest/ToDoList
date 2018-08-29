@@ -34,7 +34,7 @@ namespace ToDoServiceTests
             var response = new Uri("api/ToDoLists", UriKind.Relative);
             HttpResponseMessage sut = httpClient.GetAsync(response).GetAwaiter().GetResult();
             var typeofContentHeaders = sut.Content.Headers.ContentType.MediaType;
-            
+
             Assert.AreEqual("application/json", typeofContentHeaders);
         }
     }
