@@ -25,7 +25,7 @@ namespace ToDoListServiceTests.Scenarios.GetToDoList
 
         public void ToDoList_Is_Available()
         {
-            this._httpClient = new HttpClient
+            _httpClient = new HttpClient
             {
                 BaseAddress = new Uri("http://localhost:49469")
             };
