@@ -68,8 +68,8 @@ namespace ToDoList.Controllers
         public IActionResult PartiallyUpdate(int id, [FromBody] ToDoListItems returnList)
         {
            toDoLisToDoRepository.UpdateToDoList( id,returnList);
-            
-            if (toDoLisToDoRepository == null)
+
+            if (returnList == null)
             {
                 return BadRequest();
             }

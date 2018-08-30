@@ -11,7 +11,7 @@ using ToDoList.Models;
 namespace ToDoListServiceTests.Scenarios.AddToDoList
 {
     [TestFixture]
-    public class ToDoUpdateList
+    public class DeleteToDoList
     {
         private HttpClient httpClient;
         private Uri requestUri;
@@ -41,8 +41,10 @@ namespace ToDoListServiceTests.Scenarios.AddToDoList
         {
             var data = new ToDoListItems
             {
+                Id = 4,
                 task = "added Via service Test",
-                priority = "High"
+                priority = "High",
+                status = "Complete"
             };
 
             var convertToJson = JsonConvert.SerializeObject(data);
@@ -61,7 +63,7 @@ namespace ToDoListServiceTests.Scenarios.AddToDoList
         public void Response_Is_returned_With_Created()
         {
             // var content = sut.Content.LoadIntoBufferAsync().ToString();
-            Assert.AreEqual(sut.StatusCode, HttpStatusCode.Created);
+            Assert.AreEqual(HttpStatusCode.Created, sut.StatusCode);
         }
     }
 }
