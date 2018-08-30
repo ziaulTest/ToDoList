@@ -21,7 +21,7 @@ namespace ToDoListServiceTests.Scenarios.UpdateToDoList
 
         [Test]
         public void
-            Given_A_TodoList_Item_That_Does_Not_Exist_When_A_User_Tries_To_Adds_A_ToDoList_Item_And_They_Can_Add_An_Item_Then_The_Response_is_Ok()
+            Given_A_TodoList_Item_That_Needs_ToBe_Updated_When_A_User_Tries_To_Adds_A_ToDoList_Task_And_Priority_Then_The_Response_is_Ok()
         {
             this.Given(_ => _.A_Request_To_View_A_ToDoList())
                 .When(_ => _.The_List_Is_Then_Called())
@@ -40,7 +40,7 @@ namespace ToDoListServiceTests.Scenarios.UpdateToDoList
             requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
         }
 
-        public async Task Update_A_ToDoList_Item()
+        public void Update_A_ToDoList_Item()
         {
             var data = new ToDoListItems
             {
@@ -54,8 +54,7 @@ namespace ToDoListServiceTests.Scenarios.UpdateToDoList
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-           
-            sut = await httpClient.PutAsync(requestUri, byteContent);
+            var sut = httpClient.PutAsync(requestUri, byteContent).Result;
         }
 
         public async Task The_List_Is_Then_Called()
@@ -65,7 +64,6 @@ namespace ToDoListServiceTests.Scenarios.UpdateToDoList
 
         public void Response_Is_returned_With_Ok()
         {
-  
             Assert.AreEqual(HttpStatusCode.OK, sut.StatusCode);
         }
     }
