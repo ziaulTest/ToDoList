@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using TestStack.BDDfy;
@@ -24,8 +24,8 @@ namespace ToDoListServiceTests.Scenarios.UpdateToDoList
             Given_A_TodoList_Item_That_Needs_ToBe_Updated_When_A_User_Tries_To_Adds_A_ToDoList_Task_And_Priority_Then_The_Response_is_Ok()
         {
             this.Given(_ => _.A_Request_To_View_A_ToDoList())
-                .When(_ => _.The_List_Is_Then_Called())
-                .And(_ => _.Update_A_ToDoList_Item())
+                .When(_ => _.Update_A_ToDoList_ItemAsync())
+                .And(_ => _.The_List_Is_Then_Called())
                 .Then(_ => _.Response_Is_returned_With_Ok())
                 .BDDfy();
         }
@@ -40,7 +40,13 @@ namespace ToDoListServiceTests.Scenarios.UpdateToDoList
             requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
         }
 
-        public void Update_A_ToDoList_Item()
+        public async Task The_List_Is_Then_Called()
+        {
+            sut = await httpClient.GetAsync(requestUri);
+        }
+
+
+        public async Task Update_A_ToDoList_ItemAsync()
         {
             var data = new ToDoListItems
             {
@@ -54,17 +60,18 @@ namespace ToDoListServiceTests.Scenarios.UpdateToDoList
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var sut = httpClient.PutAsync(requestUri, byteContent).Result;
+            sut = await httpClient.PutAsync(requestUri, byteContent);
         }
 
-        public async Task The_List_Is_Then_Called()
-        {
-            sut = await httpClient.GetAsync(requestUri);
-        }
-
+      
         public void Response_Is_returned_With_Ok()
         {
+            var content = sut.Content.ReadAsStringAsync().Result;
             Assert.AreEqual(HttpStatusCode.OK, sut.StatusCode);
+            var stuff = JsonConvert.DeserializeObject<ToDoListItems>(content);
+            Assert.AreEqual(1, stuff.Id);
+            Assert.AreEqual("added Via service Test", stuff.task);
+            Assert.AreEqual("High", stuff.priority);
         }
     }
 

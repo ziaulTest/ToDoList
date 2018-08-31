@@ -18,11 +18,11 @@ namespace ToDoListServiceTests.Scenarios.AddToDoList
         private HttpResponseMessage sut;
 
         [Test]
-        public void Given_A_TodoList_Is_Being_Viewed_When_A_User_Tries_To_Adds_A_ToDoList_Task_And_They_Can_Enter_A_Task_And_Priority_Then_The_Response_is_Ok()
+        public void Given_A_TodoList_Is_Being_Viewed_When_A_User_Tries_To_Adds_A_ToDoList_Task_And_They_Can_Enter_A_Task_And_Priority_Then_The_Response_is_Created()
         {
             this.Given(_ => _.ToDoList_Is_Available())
                 .When(_ => _.The_List_Is_Then_Called())
-                .And(_ => _.Add_Task_And_Priority_To_An_existing_List())
+                .And(_ => _.Add_Item_To_An_existing_List())
                 .Then(_ => _.Response_Is_returned_With_Created())
                 .BDDfy();
         }
@@ -37,7 +37,7 @@ namespace ToDoListServiceTests.Scenarios.AddToDoList
             requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
         }
 
-        public async Task Add_Task_And_Priority_To_An_existing_List()
+        public async Task Add_Item_To_An_existing_List()
         {
             var data = new ToDoListItems
             {
@@ -62,8 +62,7 @@ namespace ToDoListServiceTests.Scenarios.AddToDoList
 
         public void Response_Is_returned_With_Created()
         {
-            // var content = sut.Content.LoadIntoBufferAsync().ToString();
-            Assert.AreEqual(HttpStatusCode.Created, sut.StatusCode);
+         Assert.AreEqual(HttpStatusCode.Created, sut.StatusCode);
         }
     }
 }

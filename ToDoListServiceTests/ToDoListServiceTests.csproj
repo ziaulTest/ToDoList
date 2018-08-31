@@ -20,4 +20,8 @@
     <ProjectReference Include="..\ToDoList\ToDoList.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Scenarios\Data Validation\" />
+  </ItemGroup>
+
 </Project>

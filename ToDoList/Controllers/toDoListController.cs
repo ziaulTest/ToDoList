@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Interface;
 using ToDoList.Models;
@@ -64,7 +63,8 @@ namespace ToDoList.Controllers
             return CreatedAtRoute("Get", ReturnList);
         }
 
-        [HttpPatch("{id}", Name = "Patch")]
+        [HttpPut("{id}", Name = "Put")]
+        // [Htt("{id}", Name = "Patch")]
         public IActionResult PartiallyUpdate(int id, [FromBody] ToDoListItems returnList)
         {
            toDoLisToDoRepository.UpdateToDoList( id,returnList);
