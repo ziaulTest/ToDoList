@@ -59,6 +59,11 @@ namespace ToDoList.Controllers
                 return BadRequest();
             }
 
+            if (ReturnList.task.Length > 5)
+            {
+                return BadRequest();
+            }
+
             toDoLisToDoRepository.InsertToDoList(ReturnList);
             return CreatedAtRoute("Get", ReturnList);
         }
