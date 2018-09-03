@@ -3,9 +3,9 @@
     public class ToDoListItems
     {
         public int Id { get; set; }
-        public string task { get; set; }  
-        public string priority { get; set; }
-        public string status { get; set; }
+        public string Task { get; set; }  
+        public string Priority { get; set; }
+        public string Status { get; set; }
     }
 }
 

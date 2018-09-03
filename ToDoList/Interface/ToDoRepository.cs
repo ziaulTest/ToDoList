@@ -23,9 +23,9 @@ namespace ToDoList.Interface
             var final = new ToDoListItems()
             {
                 Id = toDoListItems.Id,
-                priority = toDoListItems.priority,
-                status = toDoListItems.status,
-                task = toDoListItems.task
+                Priority = toDoListItems.Priority,
+                Status = toDoListItems.Status,
+                Task = toDoListItems.Task
             };
 
            ToDoListDataStore.Current.ToDoList.Add(final);
@@ -41,8 +41,8 @@ namespace ToDoList.Interface
         {
             var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
 
-                toDoListItem.priority = toDoListItems.priority;
-                toDoListItem.task = toDoListItems.task;
+                toDoListItem.Priority = toDoListItems.Priority;
+                toDoListItem.Task = toDoListItems.Task;
         }
     }
 }

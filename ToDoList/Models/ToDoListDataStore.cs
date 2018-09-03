@@ -15,23 +15,23 @@ namespace ToDoList.Models
                 new ToDoListItems()
                 {
                     Id = 1,
-                    priority = "high",
-                    task = "Wake up at 9am",
-                    status = "In Progress",
+                    Priority = "high",
+                    Task = "Wake up at 9am",
+                    Status = "In Progress",
                 },
                 new ToDoListItems()
                 {
                     Id = 2,
-                    priority = "low",
-                    task = "sleep at 8pm",
-                    status = "In Progress"
+                    Priority = "low",
+                    Task = "sleep at 8pm",
+                    Status = "In Progress"
                 },
                 new ToDoListItems()
                 {
                     Id = 3,
-                    priority = "middle",
-                    task = "take the dog for a walk",
-                    status = "done"
+                    Priority = "middle",
+                    Task = "take the dog for a walk",
+                    Status = "done"
                }
             };
         }
