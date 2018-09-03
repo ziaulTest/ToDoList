@@ -10,57 +10,58 @@ using OkObjectResult = Microsoft.AspNetCore.Mvc.OkObjectResult;
 namespace ToDoList.unitTest
 {
     [TestFixture]
-    public class GivenTasksForAToDoList
+    public class GivenATaskThatNeedsToBeAdded
     {
         private IActionResult result;
+        private ToDoListController sut;
 
         [SetUp]
-        public void WhenGetToDoListsIsCalled()
+        public void SetUp()
         {
             var todoMock = new Mock<IToDoRepository>();
-           
+
             var fakeList = new List<ToDoListItems>
             {
                 new ToDoListItems()
                 {
                     Id = 1,
-                    priority = "high",
-                    status = "started",
-                    task = "complete this test"
+                    Priority = "high",
+                    Status = "started",
+                    Task = "complete this test"
                 },
                 new ToDoListItems()
                 {
                     Id = 2,
-                    priority = "high",
-                    status = "started",
-                    task = "complete this test2222"
+                    Priority = "high",
+                    Status = "started",
+                    Task = "complete this test2222"
                 },
                 new ToDoListItems()
                 {
                     Id = 3,
-                    priority = "low",
-                    status = "done",
-                    task = "complete this test3333"
+                    Priority = "low",
+                    Status = "done",
+                    Task = "complete this test3333"
                 }
             };
 
             todoMock.Setup(x => x.GetListDataStores()).Returns(fakeList);
-           
-            var controller = new ToDoListController(todoMock.Object);
-            result = controller.GetToDoLists();
+            sut = new ToDoListController(todoMock.Object);
         }
 
         [Test]
-        public void ThenAnOkResultIsReturned()
+        public void When_Get_To_DoLists_Is_Called__Then_An_OK_Result_Is_Returned()
         {
+            result = sut.GetToDoLists();
             Assert.IsNotNull(result as OkObjectResult);
         }
 
         [Test]
-        public void Then3ItemsAreReturned()
+        public void When_Get_To_DoLists_Is_Called__Then_3_Items_Are_Returned()
         {
-            if (!((result as OkObjectResult)?.Value is List<ToDoListItems> toDoListItems)) return;
-            var count = toDoListItems.Count;
+            result = sut.GetToDoLists();
+            var toDoListItemses = (result as OkObjectResult).Value as List<ToDoListItems>;
+            var count = toDoListItemses.Count;
 
             Assert.AreEqual(3, count);
         }

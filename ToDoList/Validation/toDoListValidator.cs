@@ -14,9 +14,9 @@ namespace ToDoList.Validation
         {
             //this.CascadeMode = CascadeMode.StopOnFirstFailure;
 
-            //RuleFor(t => t.task).NotNull().MaximumLength(100);
-            //RuleFor(p => p.priority).NotNull();
-            //RuleFor(s => s.status).NotNull();
+            //RuleFor(t => t.Task).NotNull().MaximumLength(100);
+            //RuleFor(p => p.Priority).NotNull();
+            //RuleFor(s => s.Status).NotNull();
 
 
         }

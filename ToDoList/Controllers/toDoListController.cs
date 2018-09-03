@@ -59,7 +59,7 @@ namespace ToDoList.Controllers
                 return BadRequest();
             }
 
-            if (ReturnList.task.Length > 5)
+            if (ReturnList.Task.Length > 5)
             {
                 return BadRequest();
             }

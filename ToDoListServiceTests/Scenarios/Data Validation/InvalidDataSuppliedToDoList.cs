@@ -44,9 +44,9 @@ namespace ToDoListServiceTests.Scenarios.Data_Validation
             var data = new ToDoListItems
             {
                 Id = 8,
-                task = "The gym",
-                priority = "High",
-                status = "Complete"
+                Task = "The gym",
+                Priority = "High",
+                Status = "Complete"
             };
 
             var convertToJson = JsonConvert.SerializeObject(data);

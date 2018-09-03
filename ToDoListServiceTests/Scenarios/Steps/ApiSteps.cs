@@ -46,9 +46,9 @@ namespace ToDoListServiceTests.Scenarios.Steps
             var data = new ToDoListItems
             {
                 Id = 4,
-                task = "added Via service Test",
-                priority = "High",
-                status = "Complete"
+                Task = "added Via service Test",
+                Priority = "High",
+                Status = "Complete"
             };
 
             sut = await httpClient.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
@@ -59,9 +59,9 @@ namespace ToDoListServiceTests.Scenarios.Steps
             var data = new ToDoListItems
             {
                 Id = 8,
-                task = "The gym",
-                priority = "High",
-                status = "Complete"
+                Task = "The gym",
+                Priority = "High",
+                Status = "Complete"
             };
 
             sut = await httpClient.PostAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
@@ -72,8 +72,8 @@ namespace ToDoListServiceTests.Scenarios.Steps
             var data = new ToDoListItems
             {
                 Id = 1,
-                task = "added Via service Test",
-                priority = "High"
+                Task = "added Via service Test",
+                Priority = "High"
             };
 
             sut = await httpClient.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
@@ -90,8 +90,8 @@ namespace ToDoListServiceTests.Scenarios.Steps
             Assert.AreEqual(HttpStatusCode.OK, sut.StatusCode);
             var stuff = JsonConvert.DeserializeObject<ToDoListItems>(content);
             Assert.AreEqual(1, stuff.Id);
-            Assert.AreEqual("added Via service Test", stuff.task);
-            Assert.AreEqual("High", stuff.priority);
+            Assert.AreEqual("added Via service Test", stuff.Task);
+            Assert.AreEqual("High", stuff.Priority);
         }
         public void Response_Is_Returned_With_Status_Ok()
         {

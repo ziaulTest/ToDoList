@@ -10,27 +10,31 @@ using ToDoList.Models;
 
 namespace ToDoList.unitTest
 {
-   public class ToDoListInvalid
+    public class ToDoListInvalid
     {
         [TestFixture]
         public class GivenATaskForAToDoListThatIsInvalid
         {
             IActionResult result;
             Mock<IToDoRepository> todomock;
+            private ToDoListController sut;
+
 
             [SetUp]
-            public void WhenTryingtoCallanInvalidTask()
+            public void WhenTryingtoCallAnInvalidTask()
             {
                 todomock = new Mock<IToDoRepository>();
                 todomock.Setup(repository => repository.GetById(50));
- 
-                var Controller = new ToDoListController(todomock.Object);
-                result = Controller.GetToDoLists();
+
+                sut = new ToDoListController(todomock.Object);
+
             }
 
             [Test]
             public void Then_ToDoList_Is_NotFound_Within_The_Datastore()
             {
+                result = sut.GetToDoLists();
+
                 if ((result as OkObjectResult).Value is List<ToDoListItems> toDoListItemses)
                 {
                     var count = toDoListItemses.Count;
