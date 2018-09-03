@@ -32,7 +32,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
                 BaseAddress = new Uri("http://localhost:49469")
             };
 
-            requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
+            requestUri = new Uri("api/ToDoLists/", UriKind.Relative);
         }
 
         public void A_Request_To_View_ToDoLists()
@@ -136,6 +136,10 @@ namespace ToDoListServiceTests.Scenarios.Steps
         public void Response_Is_returned_With_BadRequest()
         {
             Assert.AreEqual(HttpStatusCode.BadRequest, sut.StatusCode);
+        }
+        public void Response_Is_returned_With_NotFound()
+        {
+            Assert.AreEqual(HttpStatusCode.NotFound, sut.StatusCode);
         }
 
     }
