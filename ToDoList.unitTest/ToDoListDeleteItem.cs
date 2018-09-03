@@ -15,7 +15,7 @@ namespace ToDoList.unitTest
             Mock<IToDoRepository> todomock;
 
             [SetUp]
-            public void WhenTryingtoDeleteATask()
+            public void WhenTryingToDeleteATask()
             {
                 todomock = new Mock<IToDoRepository>();
                 todomock.Setup(x => x.DeleteById(1));
