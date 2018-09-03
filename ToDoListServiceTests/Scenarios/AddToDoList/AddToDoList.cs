@@ -13,7 +13,7 @@ namespace ToDoListServiceTests.Scenarios.AddToDoList
             this.Given(_ => _.A_Request_To_View_A_ToDoList())
                 .When(_ => _.The_List_Is_Called())
                 .And(_ => _.Add_Item_To_An_existing_List())
-                .Then(_ => _.Response_Is_returned_With_Created())
+                .Then(_ => _.Response_Is_Returned_With_Status_Ok())
                 .BDDfy();
         }
     }

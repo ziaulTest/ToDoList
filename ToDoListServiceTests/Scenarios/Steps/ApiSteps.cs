@@ -25,6 +25,16 @@ namespace ToDoListServiceTests.Scenarios.Steps
             requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
         }
 
+        public void A_Invalid_Request_To_View_A_ToDoList()
+        {
+            httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:49469")
+            };
+
+            requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
+        }
+
         public void A_Request_To_View_ToDoLists()
         {
             httpClient = new HttpClient
@@ -65,6 +75,19 @@ namespace ToDoListServiceTests.Scenarios.Steps
             };
 
             sut = await httpClient.PostAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+        }
+
+        public async Task Invalid_Update_A_ToDoList_Item()
+        {
+            var data = new ToDoListItems
+            {
+                Id = 1,
+                Task = "task is not going to pass",
+                Priority = "High"
+            };
+
+            sut = await httpClient.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+
         }
 
         public async Task Update_A_ToDoList_Item()
@@ -109,6 +132,11 @@ namespace ToDoListServiceTests.Scenarios.Steps
             Assert.AreEqual(HttpStatusCode.NoContent, sut.StatusCode);
         }
 
+
+        public void Response_Is_returned_With_BadRequest()
+        {
+            Assert.AreEqual(HttpStatusCode.BadRequest, sut.StatusCode);
+        }
 
     }
 }
