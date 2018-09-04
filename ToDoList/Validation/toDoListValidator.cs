@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 using ToDoList.Models;
 
 
@@ -17,10 +13,6 @@ namespace ToDoList.Validation
             //RuleFor(t => t.Task).NotNull().MaximumLength(100);
             //RuleFor(p => p.Priority).NotNull();
             //RuleFor(s => s.Status).NotNull();
-
-
         }
-
-       
     }
 }

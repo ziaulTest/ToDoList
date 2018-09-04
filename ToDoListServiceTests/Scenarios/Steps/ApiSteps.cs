@@ -15,7 +15,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         private Uri requestUri;
         private HttpResponseMessage sut;
 
-        public void A_Request_To_View_A_ToDoList()
+        public void A_Request_To_View_A_Single_ToDoList()
         {
             httpClient = new HttpClient
             {
@@ -23,16 +23,6 @@ namespace ToDoListServiceTests.Scenarios.Steps
             };
 
             requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
-        }
-
-        public void A_Invalid_Request_To_View_A_ToDoList()
-        {
-            httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("http://localhost:49469")
-            };
-
-            requestUri = new Uri("api/ToDoLists/", UriKind.Relative);
         }
 
         public void A_Request_To_View_ToDoLists()
