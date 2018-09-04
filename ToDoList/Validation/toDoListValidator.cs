@@ -13,10 +13,6 @@ namespace ToDoList.Validation
             //RuleFor(t => t.Task).NotNull().MaximumLength(100);
             //RuleFor(p => p.Priority).NotNull();
             //RuleFor(s => s.Status).NotNull();
-
-
         }
-
-       
     }
 }
