@@ -25,6 +25,16 @@ namespace ToDoListServiceTests.Scenarios.Steps
             requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
         }
 
+        public void A_Request_To_Add_A_Single_ToDoList()
+        {
+            httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:49469")
+            };
+
+            requestUri = new Uri("api/ToDoLists/9", UriKind.Relative);
+        }
+
         public void A_Request_To_View_ToDoLists()
         {
             httpClient = new HttpClient
@@ -54,11 +64,25 @@ namespace ToDoListServiceTests.Scenarios.Steps
             sut = await httpClient.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
         }
 
+        public async Task Update_A_ToDoList_Item()
+        {
+            var data = new ToDoListItems
+            {
+                Id = 1,
+                Task = "added Via service Test",
+                Priority = "High"
+            };
+
+            sut = await httpClient.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+
+        }
+
+
         public async Task Add_Item_To_A_List()
         {
             var data = new ToDoListItems
             {
-                Id = 8,
+                Id = 9,
                 Task = "The gym",
                 Priority = "High",
                 Status = "Complete"
@@ -73,19 +97,6 @@ namespace ToDoListServiceTests.Scenarios.Steps
             {
                 Id = 1,
                 Task = "task is not going to pass",
-                Priority = "High"
-            };
-
-            sut = await httpClient.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
-
-        }
-
-        public async Task Update_A_ToDoList_Item()
-        {
-            var data = new ToDoListItems
-            {
-                Id = 1,
-                Task = "added Via service Test",
                 Priority = "High"
             };
 

@@ -21,10 +21,12 @@ namespace ToDoList.Controllers
             {
                 InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
             };
+
             try
             {
                 return Ok(toDoLisToDoRepository.GetListDataStores());
             }
+
             catch (Exception e)
             {
                telemetry.TrackEvent(e.Message); 
@@ -59,7 +61,7 @@ namespace ToDoList.Controllers
                 return BadRequest();
             }
 
-            if (ReturnList.Task.Length > 5)
+            if (ReturnList.Task.Length < 5)
             {
                 return BadRequest();
             }
@@ -79,7 +81,7 @@ namespace ToDoList.Controllers
                 return BadRequest();
             }
 
-            if (returnList.Task.Length > 5 )
+            if (returnList.Task.Length < 5 )
             {
                 return BadRequest();
             }
