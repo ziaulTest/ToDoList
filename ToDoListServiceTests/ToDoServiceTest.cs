@@ -2,7 +2,10 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
 using NUnit.Framework;
 using ToDoList;
 
@@ -11,6 +14,17 @@ namespace ToDoListServiceTests
     [TestFixture]
     public class ToDoGetListServiceTest : WebApplicationFactory<Startup>
     {
+        private readonly TestServer _server;
+        private readonly HttpClient _client;
+
+        public ToDoGetListServiceTest()
+        {
+            _server = new TestServer(WebHost.CreateDefaultBuilder()
+                .UseStartup<Startup>()
+                .UseEnvironment("Debug"));
+            _client = _server.CreateClient();
+        }
+
         [Test]
         public void Get_Request()
         {
@@ -43,11 +57,10 @@ namespace ToDoListServiceTests
         [Test]
         public async Task test_In_Store_Memory()
         {
-            var client = CreateClient();
-            
-            var resp = await client.GetAsync("api/ToDoLists");
-
-            Assert.AreEqual(resp.StatusCode, HttpStatusCode.OK);
+       
+            var resp = await _client.GetAsync("api/ToDoLists");
+           
+            Assert.AreEqual(HttpStatusCode.OK, resp.StatusCode);
         }
     }
 }

@@ -4,7 +4,7 @@ using ToDoList;
 
 namespace ToDoListServiceTests.WebAppFactory
 {
-   public class ConfigWebFactory : WebApplicationFactory<Startup>
+    public class ConfigWebFactory : WebApplicationFactory<Startup>
     {
         protected override IWebHostBuilder CreateWebHostBuilder()
         {
