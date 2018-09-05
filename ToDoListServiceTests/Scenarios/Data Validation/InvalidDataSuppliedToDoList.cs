@@ -17,9 +17,9 @@ namespace ToDoListServiceTests.Scenarios.Data_Validation
                 .BDDfy();
         }
 
-        public InvalidDataSuppliedToDoList(ConfigWebFactory inProcessFactory) : base(inProcessFactory)
-        {
-        }
+        //public InvalidDataSuppliedToDoList(ConfigWebFactory inProcessFactory) : base(inProcessFactory)
+        //{
+        //}
     }
 
 }

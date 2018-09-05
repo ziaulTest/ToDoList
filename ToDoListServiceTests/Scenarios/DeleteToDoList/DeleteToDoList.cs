@@ -8,9 +8,9 @@ namespace ToDoListServiceTests.Scenarios.DeleteToDoList
     [TestFixture]
     public class DeleteToDoList : ApiSteps
     {
-        public DeleteToDoList(ConfigWebFactory inProcessFactory) : base(inProcessFactory)
-        {
-        }
+        //public DeleteToDoList(ConfigWebFactory inProcessFactory) : base(inProcessFactory)
+        //{
+        //}
 
         [Test]
         public void Given_A_TodoList_Is_Being_Viewed_When_A_User_Tries_To_Delete_A_ToDoList_Then_The_Response_Returned_Is_NoContent()

@@ -8,9 +8,9 @@ namespace ToDoListServiceTests.Scenarios.UpdateToDoList
     [TestFixture]
     public class UpdateToDoLists : ApiSteps
     {
-        public UpdateToDoLists(ConfigWebFactory inProcessFactory) : base(inProcessFactory)
-        {
-        }
+        //public UpdateToDoLists(ConfigWebFactory inProcessFactory) : base(inProcessFactory)
+        //{
+        //}
 
         [Test]
         public void

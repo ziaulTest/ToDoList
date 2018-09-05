@@ -3,60 +3,52 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using ToDoList;
 using ToDoList.Models;
-using ToDoListServiceTests.WebAppFactory;
 
 namespace ToDoListServiceTests.Scenarios.Steps
 {
     public class ApiSteps
     {
         private HttpClient httpClient;
-        private HttpClient Client;
-        private readonly ConfigWebFactory inProcessFactory;
         private Uri requestUri;
         private HttpResponseMessage sut;
 
-        public ApiSteps(ConfigWebFactory inProcessFactory)
+        private readonly TestServer _server;
+        private readonly HttpClient _client;
+
+        public ApiSteps()
         {
-            this.inProcessFactory = inProcessFactory;
+            _server = new TestServer(WebHost.CreateDefaultBuilder()
+                .UseStartup<Startup>()
+                .UseEnvironment("Debug"));
+            _client = _server.CreateClient();
         }
 
 
         public void A_Request_To_View_A_Single_ToDoList()
         {
-            httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("http://localhost:49469")
-            };
-
             requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
         }
 
         public void A_Request_To_Add_A_Single_ToDoList()
         {
-            httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("http://localhost:49469")
-            };
-
             requestUri = new Uri("api/ToDoLists/9", UriKind.Relative);
         }
 
         public void A_Request_To_View_ToDoLists()
         {
-            httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("http://localhost:49469")
-            };
-
-            requestUri = new Uri("api/ToDoLists", UriKind.Relative);
+           requestUri = new Uri("api/ToDoLists", UriKind.Relative);
         }
 
         public async Task The_List_Is_Called()
         {
-            sut = await httpClient.GetAsync(requestUri);
+            sut = await _client.GetAsync(requestUri);
         }
 
 
@@ -70,7 +62,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
                 Status = "Complete"
             };
 
-            sut = await httpClient.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+            sut = await _client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
         }
 
         public async Task Update_A_ToDoList_Item()
@@ -82,7 +74,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
                 Priority = "High"
             };
 
-            sut = await httpClient.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+            sut = await _client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
 
         }
 
@@ -97,7 +89,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
                 Status = "Complete"
             };
 
-            sut = await httpClient.PostAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+            sut = await _client.PostAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
         }
 
         public async Task Invalid_Update_A_ToDoList_Item()
@@ -105,17 +97,17 @@ namespace ToDoListServiceTests.Scenarios.Steps
             var data = new ToDoListItems
             {
                 Id = 1,
-                Task = "task is not going to pass",
+                Task = "tass",
                 Priority = "High"
             };
 
-            sut = await httpClient.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+            sut = await _client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
 
         }
 
         public async Task Delete_An_Existing_List()
         {
-            sut = await httpClient.DeleteAsync(requestUri);
+            sut = await _client.DeleteAsync(requestUri);
         }
         public void Response_Is_returned_With_Ok()
         {
