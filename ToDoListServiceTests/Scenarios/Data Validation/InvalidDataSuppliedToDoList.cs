@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using TestStack.BDDfy;
 using ToDoListServiceTests.Scenarios.Steps;
+using ToDoListServiceTests.WebAppFactory;
 
 namespace ToDoListServiceTests.Scenarios.Data_Validation
 {
@@ -15,6 +16,11 @@ namespace ToDoListServiceTests.Scenarios.Data_Validation
                 .Then(_ => _.Response_Is_returned_With_BadRequest())
                 .BDDfy();
         }
+
+        public InvalidDataSuppliedToDoList(ConfigWebFactory inProcessFactory) : base(inProcessFactory)
+        {
+        }
     }
+
 }
 

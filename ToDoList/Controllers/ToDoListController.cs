@@ -41,16 +41,15 @@ namespace ToDoList.Controllers
             {
                 InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
             };
+
             var listToReturn = toDoLisToDoRepository.GetById(id);
-            MetricsTracker tracker = new MetricsTracker(telemetry);
 
-            if (listToReturn == null)
-            {
-                tracker.Customlog();
-                return NotFound();
-             }
+            if (listToReturn != null) return Ok(listToReturn);
 
-            return Ok(listToReturn);
+            telemetry.TrackEvent("GetByID");
+            telemetry.TrackTrace("listToReturn is null");
+            telemetry.Flush();
+            return NotFound();
         }
 
         [HttpPost("{id}", Name = "Post")]
