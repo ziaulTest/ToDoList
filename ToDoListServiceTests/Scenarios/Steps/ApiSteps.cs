@@ -6,14 +6,23 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using ToDoList.Models;
+using ToDoListServiceTests.WebAppFactory;
 
 namespace ToDoListServiceTests.Scenarios.Steps
 {
     public class ApiSteps
     {
         private HttpClient httpClient;
+        private HttpClient Client;
+        private readonly ConfigWebFactory inProcessFactory;
         private Uri requestUri;
         private HttpResponseMessage sut;
+
+        public ApiSteps(ConfigWebFactory inProcessFactory)
+        {
+            this.inProcessFactory = inProcessFactory;
+        }
+
 
         public void A_Request_To_View_A_Single_ToDoList()
         {

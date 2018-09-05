@@ -1,12 +1,17 @@
 ﻿using NUnit.Framework;
 using TestStack.BDDfy;
 using ToDoListServiceTests.Scenarios.Steps;
+using ToDoListServiceTests.WebAppFactory;
 
 namespace ToDoListServiceTests.Scenarios.GetToDoList
 {
     [TestFixture]
     public class ToDoGetLists : ApiSteps
     {
+        public ToDoGetLists(ConfigWebFactory inProcessFactory) : base(inProcessFactory)
+        {
+        }
+
         [Test]
         public void Given_A_TodoList_When_Get_Is_Called_Then_The_Response_Is_Ok()
         {
