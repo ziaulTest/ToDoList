@@ -15,22 +15,18 @@ namespace ToDoListServiceTests.Scenarios.Steps
 {
     public class ApiSteps
     {
-      //  private HttpClient httpClient;
         private Uri requestUri;
         private HttpResponseMessage sut;
-
-        private readonly TestServer _server;
-        private readonly HttpClient _client;
+        private readonly HttpClient client;
 
         public ApiSteps()
         {
-            _server = new TestServer(WebHost.CreateDefaultBuilder()
+            var server = new TestServer(WebHost.CreateDefaultBuilder()
                 .UseStartup<Startup>()
                 .UseEnvironment("Debug"));
-            _client = _server.CreateClient();
+            client = server.CreateClient();
         }
-
-
+        
         public void A_Request_To_View_A_Single_ToDoList()
         {
             requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
@@ -43,15 +39,14 @@ namespace ToDoListServiceTests.Scenarios.Steps
 
         public void A_Request_To_View_ToDoLists()
         {
-           requestUri = new Uri("api/ToDoLists", UriKind.Relative);
+            requestUri = new Uri("api/ToDoLists", UriKind.Relative);
         }
 
         public async Task The_List_Is_Called()
         {
-            sut = await _client.GetAsync(requestUri);
+            sut = await client.GetAsync(requestUri);
         }
-
-
+        
         public async Task Add_Item_To_An_existing_List()
         {
             var data = new ToDoListItems
@@ -62,7 +57,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
                 Status = "Complete"
             };
 
-            sut = await _client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+            sut = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
         }
 
         public async Task Update_A_ToDoList_Item()
@@ -72,13 +67,12 @@ namespace ToDoListServiceTests.Scenarios.Steps
                 Id = 1,
                 Priority = "High",
                 Task = "added Via service Test"
-                
+
             };
 
-            sut = await _client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+            sut = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
 
         }
-
 
         public async Task Add_Item_To_A_List()
         {
@@ -90,7 +84,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
                 Status = "Complete"
             };
 
-            sut = await _client.PostAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+            sut = await client.PostAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
         }
 
         public async Task Invalid_Update_A_ToDoList_Item()
@@ -102,13 +96,13 @@ namespace ToDoListServiceTests.Scenarios.Steps
                 Priority = "High"
             };
 
-            sut = await _client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+            sut = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
 
         }
 
         public async Task Delete_An_Existing_List()
         {
-            sut = await _client.DeleteAsync(requestUri);
+            sut = await client.DeleteAsync(requestUri);
         }
         public void Response_Is_returned_With_Ok()
         {
@@ -134,7 +128,6 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             Assert.AreEqual(HttpStatusCode.NoContent, sut.StatusCode);
         }
-
 
         public void Response_Is_returned_With_BadRequest()
         {
