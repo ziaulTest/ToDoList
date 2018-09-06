@@ -15,7 +15,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
 {
     public class ApiSteps
     {
-        private HttpClient httpClient;
+      //  private HttpClient httpClient;
         private Uri requestUri;
         private HttpResponseMessage sut;
 
@@ -70,8 +70,9 @@ namespace ToDoListServiceTests.Scenarios.Steps
             var data = new ToDoListItems
             {
                 Id = 1,
-                Task = "added Via service Test",
-                Priority = "High"
+                Priority = "High",
+                Task = "added Via service Test"
+                
             };
 
             sut = await _client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
