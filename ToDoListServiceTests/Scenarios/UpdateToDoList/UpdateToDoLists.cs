@@ -7,10 +7,6 @@ namespace ToDoListServiceTests.Scenarios.UpdateToDoList
     [TestFixture]
     public class UpdateToDoLists : ApiSteps
     {
-        //public UpdateToDoLists(ConfigWebFactory inProcessFactory) : base(inProcessFactory)
-        //{
-        //}
-
         [Test]
         public void
             Given_A_TodoList_Item_That_Needs_ToBe_Updated_When_A_User_Tries_To_Adds_A_ToDoList_Task_And_Priority_Then_The_Response_is_Ok()
