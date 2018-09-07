@@ -66,7 +66,7 @@ namespace ToDoList.Controllers
                 return BadRequest();
             }
             // model state change validation
-            if (!ModelState.IsValid)
+            if (returnList.Task.Length < 5)
             {
                 telemetry.TrackTrace("Validation failed");
                 telemetry.Flush();
@@ -90,15 +90,16 @@ namespace ToDoList.Controllers
                 return BadRequest();
             }
            
-            if (ModelState.IsValid)
+            if (returnList.Task.Length < 5)
             {
-                toDoLisToDoRepository.UpdateToDoList(id, returnList);
-                return Ok();
+                telemetry.TrackTrace("Validation failed");
+                telemetry.Flush();
+
+                return BadRequest();
             }
-            telemetry.TrackTrace("Validation failed");
-            telemetry.Flush();
+            toDoLisToDoRepository.UpdateToDoList(id, returnList);
+            return Ok();
             
-            return BadRequest();
         }
 
         [HttpDelete("{id}" , Name = "Delete")]

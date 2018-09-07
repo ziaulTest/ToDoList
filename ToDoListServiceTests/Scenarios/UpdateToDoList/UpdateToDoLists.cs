@@ -17,7 +17,6 @@ namespace ToDoListServiceTests.Scenarios.UpdateToDoList
         {
             this.Given(_ => _.A_Request_To_View_A_Single_ToDoList())
                 .When(_ => _.Update_A_ToDoList_Item())
-                .And(_ => _.The_List_Is_Called())
                 .Then(_ => _.Response_Is_returned_With_Ok())
                 .BDDfy();
         }

@@ -26,7 +26,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
                 .UseEnvironment("Debug"));
             client = server.CreateClient();
         }
-        
+
         public void A_Request_To_View_A_Single_ToDoList()
         {
             requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
@@ -46,7 +46,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             sut = await client.GetAsync(requestUri);
         }
-        
+
         public async Task Add_Item_To_An_existing_List()
         {
             var data = new ToDoListItems
@@ -106,13 +106,9 @@ namespace ToDoListServiceTests.Scenarios.Steps
         }
         public void Response_Is_returned_With_Ok()
         {
-            var content = sut.Content.ReadAsStringAsync().Result;
             Assert.AreEqual(HttpStatusCode.OK, sut.StatusCode);
-            var stuff = JsonConvert.DeserializeObject<ToDoListItems>(content);
-            Assert.AreEqual(1, stuff.Id);
-            Assert.AreEqual("added Via service Test", stuff.Task);
-            Assert.AreEqual("High", stuff.Priority);
         }
+
         public void Response_Is_Returned_With_Status_Ok()
         {
             var content = sut.Content.ReadAsStringAsync().Result;
