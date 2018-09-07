@@ -49,43 +49,57 @@ namespace ToDoList.Controllers
             telemetry.TrackEvent("GetByID");
             telemetry.TrackTrace("listToReturn is null");
             telemetry.Flush();
+            
             return NotFound();
         }
 
         [HttpPost("{id}", Name = "Post")]
-        public IActionResult PostToDoList([FromBody] ToDoListItems ReturnList)
+        public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
-            if (ReturnList == null)
+            var telemetry = new Microsoft.ApplicationInsights.TelemetryClient
             {
-                return BadRequest();
-            }
-
-            if (ReturnList.Task.Length < 5)
-            {
-                return BadRequest();
-            }
-
-            toDoLisToDoRepository.InsertToDoList(ReturnList);
-            return CreatedAtRoute("Get", ReturnList);
-        }
-
-        [HttpPut("{id}", Name = "Put")]
-        // [Htt("{id}", Name = "Patch")]
-        public IActionResult PartiallyUpdate(int id, [FromBody] ToDoListItems returnList)
-        {
-           toDoLisToDoRepository.UpdateToDoList( id,returnList);
+                InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
+            };
 
             if (returnList == null)
             {
                 return BadRequest();
             }
-
-            if (returnList.Task.Length < 5 )
+            // model state change validation
+            if (returnList.Task.Length < 5)
             {
+                telemetry.TrackTrace("Validation failed");
+                telemetry.Flush();
                 return BadRequest();
             }
 
+            toDoLisToDoRepository.InsertToDoList(returnList);
+            return CreatedAtRoute("Get", returnList);
+        }
+
+        [HttpPut("{id}", Name = "Put")]
+        public IActionResult PartiallyUpdate(int id, [FromBody] ToDoListItems returnList)
+        {
+            var telemetry = new Microsoft.ApplicationInsights.TelemetryClient
+            {
+                InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
+            };
+            
+            if (returnList == null)
+            {
+                return BadRequest();
+            }
+           
+            if (returnList.Task.Length < 5)
+            {
+                telemetry.TrackTrace("Validation failed");
+                telemetry.Flush();
+
+                return BadRequest();
+            }
+            toDoLisToDoRepository.UpdateToDoList(id, returnList);
             return Ok();
+            
         }
 
         [HttpDelete("{id}" , Name = "Delete")]
