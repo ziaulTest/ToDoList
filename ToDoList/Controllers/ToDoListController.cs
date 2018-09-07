@@ -49,6 +49,7 @@ namespace ToDoList.Controllers
             telemetry.TrackEvent("GetByID");
             telemetry.TrackTrace("listToReturn is null");
             telemetry.Flush();
+            
             return NotFound();
         }
 
@@ -83,17 +84,17 @@ namespace ToDoList.Controllers
             {
                 InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
             };
-
-            toDoLisToDoRepository.UpdateToDoList( id,returnList);
-
+            
             if (returnList == null)
             {
                 return BadRequest();
             }
-
+           
             if (ModelState.IsValid) return Ok();
             telemetry.TrackTrace("Validation failed");
             telemetry.Flush();
+
+            toDoLisToDoRepository.UpdateToDoList(id, returnList);
             return BadRequest();
 
         }

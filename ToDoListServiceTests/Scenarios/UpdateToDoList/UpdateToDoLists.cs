@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using TestStack.BDDfy;
 using ToDoListServiceTests.Scenarios.Steps;
-using ToDoListServiceTests.WebAppFactory;
 
 namespace ToDoListServiceTests.Scenarios.UpdateToDoList
 {
