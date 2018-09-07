@@ -90,13 +90,15 @@ namespace ToDoList.Controllers
                 return BadRequest();
             }
            
-            if (ModelState.IsValid) return Ok();
+            if (ModelState.IsValid)
+            {
+                toDoLisToDoRepository.UpdateToDoList(id, returnList);
+                return Ok();
+            }
             telemetry.TrackTrace("Validation failed");
             telemetry.Flush();
-
-            toDoLisToDoRepository.UpdateToDoList(id, returnList);
+            
             return BadRequest();
-
         }
 
         [HttpDelete("{id}" , Name = "Delete")]

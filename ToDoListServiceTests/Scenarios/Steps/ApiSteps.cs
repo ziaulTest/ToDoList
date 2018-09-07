@@ -34,7 +34,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
 
         public void A_Request_To_Add_A_Single_ToDoList()
         {
-            requestUri = new Uri("api/ToDoLists/9", UriKind.Relative);
+            requestUri = new Uri("api/ToDoLists/4", UriKind.Relative);
         }
 
         public void A_Request_To_View_ToDoLists()
@@ -78,8 +78,8 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                Id = 9,
-                Task = "The gym",
+                Id = 4,
+                Task = "The gym at 9pm",
                 Priority = "High",
                 Status = "Complete"
             };
