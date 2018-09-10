@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using ToDoList.Interface;
 using ToDoList.Models;
 
@@ -66,9 +68,9 @@ namespace ToDoList.Controllers
                 return BadRequest();
             }
             // model state change validation
-            if (returnList.Task.Length < 5)
+            if (!ModelState.IsValid)
             {
-                telemetry.TrackTrace("Validation failed");
+                telemetry.TrackTrace(ModelState.Values.ToString());
                 telemetry.Flush();
                 return BadRequest();
             }
@@ -85,7 +87,7 @@ namespace ToDoList.Controllers
                 InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
             };
             
-            if (returnList == null)
+            if (returnList == null) 
             {
                 return BadRequest();
             }
