@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using FluentValidation.Validators;
-
+﻿
 namespace ToDoList.Models
 {
     public class ToDoListItems

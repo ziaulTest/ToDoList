@@ -70,7 +70,7 @@ namespace ToDoList.Controllers
             // model state change validation
             if (!ModelState.IsValid)
             {
-                telemetry.TrackTrace(ModelState.Values.ToString());
+                telemetry.TrackTrace(ModelState.ValidationState.ToString());
                 telemetry.Flush();
                 return BadRequest();
             }
