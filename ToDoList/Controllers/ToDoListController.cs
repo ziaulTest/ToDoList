@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using ToDoList.Interface;
 using ToDoList.Models;
 
@@ -70,7 +68,7 @@ namespace ToDoList.Controllers
             // model state change validation
             if (!ModelState.IsValid)
             {
-                telemetry.TrackTrace(ModelState.Values.ToString());
+                telemetry.TrackTrace(ModelState.ValidationState.ToString());
                 telemetry.Flush();
                 return BadRequest();
             }
@@ -80,7 +78,7 @@ namespace ToDoList.Controllers
         }
 
         [HttpPut("{id}", Name = "Put")]
-        public IActionResult PartiallyUpdate(int id, [FromBody] ToDoListItems returnList)
+        public IActionResult PartiallyUpdate(int id, [FromBody] PartialToDoItems returnList)
         {
             var telemetry = new Microsoft.ApplicationInsights.TelemetryClient
             {
@@ -91,8 +89,8 @@ namespace ToDoList.Controllers
             {
                 return BadRequest();
             }
-           
-            if (returnList.Task.Length < 5)
+   
+            if (!ModelState.IsValid)
             {
                 telemetry.TrackTrace("Validation failed");
                 telemetry.Flush();

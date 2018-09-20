@@ -36,7 +36,7 @@ namespace ToDoList.Interface
             ToDoListDataStore.Current.ToDoList.Remove(toDoListItem);
         }
 
-        public void UpdateToDoList(int id,ToDoListItems toDoListItems)
+        public void UpdateToDoList(int id,PartialToDoItems toDoListItems)
         {
             var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
 
