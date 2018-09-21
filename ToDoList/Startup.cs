@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ToDoList.Interface;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Interface;
 using ToDoList.Models;
@@ -17,7 +18,7 @@ namespace ToDoList.Controllers
         [HttpGet]
         public IActionResult GetToDoLists()
         {
-            var telemetry = new Microsoft.ApplicationInsights.TelemetryClient
+            var telemetry = new TelemetryClient
             {
                 InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
             };
@@ -29,7 +30,7 @@ namespace ToDoList.Controllers
 
             catch (Exception e)
             {
-               telemetry.TrackEvent(e.Message); 
+                telemetry.TrackEvent(e.Message);
                 throw;
             }
         }
@@ -37,7 +38,7 @@ namespace ToDoList.Controllers
         [HttpGet("{id}", Name = "Get")]
         public IActionResult GetToDoList(int id)
         {
-            var telemetry = new Microsoft.ApplicationInsights.TelemetryClient
+            var telemetry = new TelemetryClient
             {
                 InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
             };
@@ -49,14 +50,33 @@ namespace ToDoList.Controllers
             telemetry.TrackEvent("GetByID");
             telemetry.TrackTrace("listToReturn is null");
             telemetry.Flush();
-            
+
             return NotFound();
         }
 
         [HttpPost("{id}", Name = "Post")]
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
-            var telemetry = new Microsoft.ApplicationInsights.TelemetryClient
+            var telemetry = new TelemetryClient
+            {
+                InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
+            };
+
+            if (returnList == null)
+            {
+                telemetry.TrackEvent("list error");
+                telemetry.Flush();
+                return BadRequest();
+
+            }
+            toDoLisToDoRepository.InsertToDoList(returnList);
+            return CreatedAtRoute("Get", returnList);
+        }
+
+        [HttpPut("{id}", Name = "Put")]
+        public IActionResult PartiallyUpdate(int id, [FromBody] PartialToDoItems returnList)
+        {
+            var telemetry = new TelemetryClient
             {
                 InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
             };
@@ -65,31 +85,7 @@ namespace ToDoList.Controllers
             {
                 return BadRequest();
             }
-            // model state change validation
-            if (!ModelState.IsValid)
-            {
-                telemetry.TrackTrace(ModelState.ValidationState.ToString());
-                telemetry.Flush();
-                return BadRequest();
-            }
 
-            toDoLisToDoRepository.InsertToDoList(returnList);
-            return CreatedAtRoute("Get", returnList);
-        }
-
-        [HttpPut("{id}", Name = "Put")]
-        public IActionResult PartiallyUpdate(int id, [FromBody] PartialToDoItems returnList)
-        {
-            var telemetry = new Microsoft.ApplicationInsights.TelemetryClient
-            {
-                InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
-            };
-            
-            if (returnList == null) 
-            {
-                return BadRequest();
-            }
-   
             if (!ModelState.IsValid)
             {
                 telemetry.TrackTrace("Validation failed");
@@ -99,10 +95,10 @@ namespace ToDoList.Controllers
             }
             toDoLisToDoRepository.UpdateToDoList(id, returnList);
             return Ok();
-            
+
         }
 
-        [HttpDelete("{id}" , Name = "Delete")]
+        [HttpDelete("{id}", Name = "Delete")]
         public IActionResult DeleteList(int id)
         {
             toDoLisToDoRepository.DeleteById(id);
