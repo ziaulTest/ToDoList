@@ -27,6 +27,13 @@ namespace ToDoListServiceTests.Scenarios.Steps
             client = server.CreateClient();
         }
 
+        [TearDown]
+        public void Dispose()
+        {
+            /* ... */ 
+
+        }
+
         public void A_Request_To_View_A_Single_ToDoList()
         {
             requestUri = new Uri("api/ToDoLists/1", UriKind.Relative);
