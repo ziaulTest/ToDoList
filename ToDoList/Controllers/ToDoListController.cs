@@ -90,7 +90,6 @@ namespace ToDoList.Controllers
             {
                 telemetry.TrackTrace("Validation failed");
                 telemetry.Flush();
-
                 return BadRequest();
             }
             toDoLisToDoRepository.UpdateToDoList(id, returnList);

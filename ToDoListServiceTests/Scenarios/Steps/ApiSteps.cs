@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Azure.Documents.SystemFunctions;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using ToDoList;
@@ -13,13 +14,15 @@ using ToDoList.Models;
 
 namespace ToDoListServiceTests.Scenarios.Steps
 {
-    public class ApiSteps
+    public class ApiSteps : IDisposable
     {
         private Uri requestUri;
         private HttpResponseMessage sut;
-        private readonly HttpClient client;
+        private  HttpClient client;
 
-        public ApiSteps()
+        
+        [SetUp]
+        public void TestServer()
         {
             var server = new TestServer(WebHost.CreateDefaultBuilder()
                 .UseStartup<Startup>()
@@ -30,8 +33,8 @@ namespace ToDoListServiceTests.Scenarios.Steps
         [TearDown]
         public void Dispose()
         {
-            /* ... */ 
-
+            sut.Dispose();
+            client.Dispose();
         }
 
         public void A_Request_To_View_A_Single_ToDoList()
