@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.Azure.Documents.SystemFunctions;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using ToDoList;
@@ -35,6 +34,8 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             sut.Dispose();
             client.Dispose();
+
+            
         }
 
         public void A_Request_To_View_A_Single_ToDoList()

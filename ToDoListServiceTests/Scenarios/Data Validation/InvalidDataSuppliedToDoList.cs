@@ -15,11 +15,6 @@ namespace ToDoListServiceTests.Scenarios.Data_Validation
                 .Then(_ => _.Response_Is_returned_With_BadRequest())
                 .BDDfy();
         }
-
-        //    [Test]
-
-        //    public void Given_A_Todolist_Item_That_Needs_To_Be_Updated
     }
-
 }
 
