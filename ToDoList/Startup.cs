@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,16 +27,13 @@ namespace ToDoList
         {
             services.AddMvc(options =>
             {
-                options.ReturnHttpNotAcceptable = true;
+                //options.ReturnHttpNotAcceptable = true;
                 options.Filters.Add(new TypeFilterAttribute(typeof(ValidateModelFilter)));
             }).AddFluentValidation(fv =>
             {
                 fv.RegisterValidatorsFromAssemblyContaining<Startup>();
-
             });
-            
-           // services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
-
+            // services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddSingleton<IToDoRepository, ToDoRepository>();
         }
 
