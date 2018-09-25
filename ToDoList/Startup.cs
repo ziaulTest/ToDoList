@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ToDoList.Interface;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using ToDoList.Filters;
 
 
 namespace ToDoList
@@ -22,7 +24,17 @@ namespace ToDoList
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+            services.AddMvc(options =>
+            {
+                options.ReturnHttpNotAcceptable = true;
+                options.Filters.Add(new TypeFilterAttribute(typeof(ValidateModelFilter)));
+            }).AddFluentValidation(fv =>
+            {
+                fv.RegisterValidatorsFromAssemblyContaining<Startup>();
+
+            });
+            
+           // services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddSingleton<IToDoRepository, ToDoRepository>();
         }
