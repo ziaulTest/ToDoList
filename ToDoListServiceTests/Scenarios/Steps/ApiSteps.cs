@@ -13,18 +13,27 @@ using ToDoList.Models;
 
 namespace ToDoListServiceTests.Scenarios.Steps
 {
-    public class ApiSteps
+    public class ApiSteps : IDisposable
     {
         private Uri requestUri;
         private HttpResponseMessage sut;
-        private readonly HttpClient client;
+        private  HttpClient client;
 
-        public ApiSteps()
+        
+        [SetUp]
+        public void TestServer()
         {
             var server = new TestServer(WebHost.CreateDefaultBuilder()
                 .UseStartup<Startup>()
                 .UseEnvironment("Debug"));
             client = server.CreateClient();
+        }
+
+        [TearDown]
+        public void Dispose()
+        {
+            sut.Dispose();
+            client.Dispose();
         }
 
         public void A_Request_To_View_A_Single_ToDoList()

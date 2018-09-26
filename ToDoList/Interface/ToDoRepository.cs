@@ -39,9 +39,9 @@ namespace ToDoList.Interface
         public void UpdateToDoList(int id,PartialToDoItems toDoListItems)
         {
             var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id);
-
-                toDoListItem.Priority = toDoListItems.Priority;
-                toDoListItem.Task = toDoListItems.Task;
+            if (toDoListItem == null) return;
+            toDoListItem.Priority = toDoListItems.Priority;
+            toDoListItem.Task = toDoListItems.Task;
         }
     }
 }
