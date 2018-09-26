@@ -1,23 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.ApplicationInsights;
+using ToDoList.Controllers;
 
 namespace ToDoList
 {
     public class MetricsTracker
     {
-        private readonly TelemetryClient _telemetryClient;
+        private readonly TelemetryClient telemetryClient;
 
-        public MetricsTracker( TelemetryClient telemetryClient)
+        public MetricsTracker(TelemetryClient telemetryClient)
         {
-            this._telemetryClient = telemetryClient ?? throw new ArgumentNullException(nameof(telemetryClient));
+            this.telemetryClient = telemetryClient ?? throw new ArgumentNullException(nameof(telemetryClient));
         }
 
-        public void Customlog()
+        public void EventTracker(string str)
         {
-            //_telemetryClient.TrackException();
+
+            telemetryClient.TrackEvent("");
         }
+
+        public void LogException(Exception ex)
+        {
+            telemetryClient.TrackException(ex);
+        }
+
+        public void TrackTrace(string str)
+        {
+            telemetryClient.TrackTrace("");
+        }
+
     }
 }

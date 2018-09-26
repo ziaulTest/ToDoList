@@ -1,5 +1,4 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ToDoList.Interface;
 using ToDoList.Models;
 
@@ -9,9 +8,11 @@ namespace ToDoList.Controllers
     public class ToDoListController : Controller
     {
         private readonly IToDoRepository toDoLisToDoRepository;
+        private readonly MetricsTracker MetricsTracker;
         public ToDoListController(IToDoRepository toDoLisToDoRepository)
         {
             this.toDoLisToDoRepository = toDoLisToDoRepository;
+
         }
 
         [HttpGet]
@@ -23,33 +24,21 @@ namespace ToDoList.Controllers
         [HttpGet("{id}", Name = "Get")]
         public IActionResult GetToDoList(int id)
         {
-            var telemetry = new TelemetryClient
-            {
-                InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
-            };
 
             var listToReturn = toDoLisToDoRepository.GetById(id);
 
             if (listToReturn != null) return Ok(listToReturn);
-
-            telemetry.TrackEvent("GetByID");
-            telemetry.TrackTrace("listToReturn is null");
-            telemetry.Flush();
             return NotFound();
         }
 
         [HttpPost("{id}", Name = "Post")]
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
-            var telemetry = new TelemetryClient
-            {
-                InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
-            };
 
             if (returnList == null)
             {
-                telemetry.TrackEvent("list error");
-                telemetry.Flush();
+                MetricsTracker.EventTracker("return list is null");
+                MetricsTracker.TrackTrace("check" + BadRequest());
                 return BadRequest();
             }
             toDoLisToDoRepository.InsertToDoList(returnList);
@@ -59,17 +48,11 @@ namespace ToDoList.Controllers
         [HttpPut("{id}", Name = "Put")]
         public IActionResult PartiallyUpdate(int id, [FromBody] PartialToDoItems returnList)
         {
-            var telemetry = new TelemetryClient
-            {
-                InstrumentationKey = "47b29c20-45be-4c08-a45d-e376bc9a05a9"
-            };
-
             if (returnList == null)
             {
-                telemetry.TrackTrace("Validation failed");
-                telemetry.Flush();
                 return BadRequest();
             }
+
             toDoLisToDoRepository.UpdateToDoList(id, returnList);
             return Ok();
         }
