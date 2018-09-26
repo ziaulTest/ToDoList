@@ -34,8 +34,6 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             sut.Dispose();
             client.Dispose();
-
-            
         }
 
         public void A_Request_To_View_A_Single_ToDoList()

@@ -51,7 +51,6 @@ namespace ToDoList.Controllers
                 telemetry.TrackEvent("list error");
                 telemetry.Flush();
                 return BadRequest();
-
             }
             toDoLisToDoRepository.InsertToDoList(returnList);
             return CreatedAtRoute("Get", returnList);

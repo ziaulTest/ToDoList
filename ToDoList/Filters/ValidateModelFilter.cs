@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ToDoList.Filters
@@ -11,6 +12,10 @@ namespace ToDoList.Filters
             {
                 await next.Invoke();
             }
+
+            context.Result = new BadRequestObjectResult(context.ModelState);
         }
+
     }
+    
 }
