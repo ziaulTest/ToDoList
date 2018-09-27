@@ -9,7 +9,6 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Filters;
 
-
 namespace ToDoList
 {
     public class Startup
@@ -26,17 +25,15 @@ namespace ToDoList
         {
             services.AddMvc(options =>
             {
-                //options.ReturnHttpNotAcceptable = true;
-                options.Filters.Add(new TypeFilterAttribute(typeof(ValidateModelFilter)));
+               options.Filters.Add(new TypeFilterAttribute(typeof(ValidateModelFilter)));
             }).AddFluentValidation(fv =>
             {
                 fv.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
-            // services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddSingleton<IToDoRepository, ToDoRepository>();
+            services.AddSingleton<IMetricsTrackerRepository, MetricsTracker>();
         }
 
-        // come here 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();

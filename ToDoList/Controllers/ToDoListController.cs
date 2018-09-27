@@ -8,11 +8,11 @@ namespace ToDoList.Controllers
     public class ToDoListController : Controller
     {
         private readonly IToDoRepository toDoLisToDoRepository;
-        private readonly MetricsTracker MetricsTracker;
-        public ToDoListController(IToDoRepository toDoLisToDoRepository)
+        private readonly IMetricsTrackerRepository metricsTracker;
+        public ToDoListController(IToDoRepository toDoLisToDoRepository, IMetricsTrackerRepository metricsTracker)
         {
             this.toDoLisToDoRepository = toDoLisToDoRepository;
-
+            this.metricsTracker = metricsTracker;
         }
 
         [HttpGet]
@@ -34,11 +34,11 @@ namespace ToDoList.Controllers
         [HttpPost("{id}", Name = "Post")]
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
-
+            metricsTracker.TrackTrace("Post Successful");
             if (returnList == null)
             {
-                MetricsTracker.EventTracker("return list is null");
-                MetricsTracker.TrackTrace("check" + BadRequest());
+                //metricsTracker.EventTracker("return list is null");
+                //metricsTracker.TrackTrace("check" + BadRequest());  
                 return BadRequest();
             }
             toDoLisToDoRepository.InsertToDoList(returnList);
