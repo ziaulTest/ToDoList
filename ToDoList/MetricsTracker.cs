@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.ApplicationInsights;
-using ToDoList.Controllers;
 
 namespace ToDoList
 {
