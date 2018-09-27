@@ -9,9 +9,10 @@ namespace ToDoList.Controllers
     {
         private readonly IToDoRepository toDoLisToDoRepository;
         private readonly MetricsTracker MetricsTracker;
-        public ToDoListController(IToDoRepository toDoLisToDoRepository)
+        public ToDoListController(IToDoRepository toDoLisToDoRepository, MetricsTracker metricsTracker)
         {
             this.toDoLisToDoRepository = toDoLisToDoRepository;
+            this.MetricsTracker = metricsTracker;
 
         }
 
@@ -34,7 +35,7 @@ namespace ToDoList.Controllers
         [HttpPost("{id}", Name = "Post")]
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
-
+            MetricsTracker.TrackTrace("Post Successful");
             if (returnList == null)
             {
                 MetricsTracker.EventTracker("return list is null");

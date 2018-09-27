@@ -6,8 +6,6 @@ namespace ToDoList.Filters
 {
     public class ValidateModelFilter : IAsyncActionFilter
     {
-        //private readonly MetricsTracker MetricsTracker;
-
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             if (context.ModelState.IsValid)
@@ -17,7 +15,6 @@ namespace ToDoList.Filters
             }
             var errors = context.ModelState;
             context.Result = new BadRequestObjectResult(errors);
-           // MetricsTracker.TrackTrace(errors.ToString());
         }
     }
 }

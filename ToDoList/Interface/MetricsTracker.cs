@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.ApplicationInsights;
+using ToDoList.Interface;
 
 namespace ToDoList
 {
-    public class MetricsTracker
+    public class MetricsTracker : IMetricsTrackerRepository
     {
         private readonly TelemetryClient telemetryClient;
 
