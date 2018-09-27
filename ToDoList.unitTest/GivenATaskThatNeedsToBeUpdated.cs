@@ -17,6 +17,7 @@ namespace ToDoList.unitTest
         public void SetUp()
         {
             var mockRepository = new Mock<IToDoRepository>();
+            var metricsMock = new  Mock<IMetricsTrackerRepository>();
             var old = new ToDoListItems
             {
                 Id = 1,
@@ -26,7 +27,7 @@ namespace ToDoList.unitTest
 
             mockRepository.Setup(x => x.GetById(It.Is<int>(i => i == 1))).Returns(old);
             mockRepository.Setup(x => x.UpdateToDoList(It.Is<int>(i => i == 1), It.IsAny<PartialToDoItems>()));
-            sut = new ToDoListController(mockRepository.Object);
+            sut = new ToDoListController(mockRepository.Object, metricsMock.Object);
         }
 
         [Test]

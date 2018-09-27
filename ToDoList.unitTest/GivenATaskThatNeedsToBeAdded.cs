@@ -19,6 +19,7 @@ namespace ToDoList.unitTest
         public void SetUp()
         {
             var todoMock = new Mock<IToDoRepository>();
+            var metricsMock = new Mock<IMetricsTrackerRepository>();
 
             var fakeList = new List<ToDoListItems>
             {
@@ -46,7 +47,7 @@ namespace ToDoList.unitTest
             };
 
             todoMock.Setup(x => x.GetListDataStores()).Returns(fakeList);
-            sut = new ToDoListController(todoMock.Object);
+            sut = new ToDoListController(todoMock.Object, metricsMock.Object);
         }
 
         [Test]
