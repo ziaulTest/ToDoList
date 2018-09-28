@@ -1,8 +1,7 @@
 ﻿using System;
 using Microsoft.ApplicationInsights;
-using ToDoList.Interface;
 
-namespace ToDoList
+namespace ToDoList.Interface
 {
     public class MetricsTracker : IMetricsTrackerRepository
     {

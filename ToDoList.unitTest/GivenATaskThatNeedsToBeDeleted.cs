@@ -14,6 +14,12 @@ namespace ToDoList.unitTest
         Mock<IToDoRepository> _todomock;
         private Mock<IMetricsTrackerRepository> metricsMock;
         private ToDoListController sut;
+       
+        //public GivenATaskWhichNeedsToBeDeleted(Mock<IToDoRepository> todomock, Mock<IMetricsTrackerRepository> metricsMock)
+        //{
+        //    this._todomock = todomock;
+        //    this.metricsMock = metricsMock;
+        //}
 
         [SetUp]
         public void SetUp()
