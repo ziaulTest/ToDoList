@@ -24,6 +24,7 @@ namespace ToDoList
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationInsightsTelemetry(Configuration); 
+
             
             services.AddMvc(options =>
             {

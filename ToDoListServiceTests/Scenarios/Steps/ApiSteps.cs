@@ -68,6 +68,19 @@ namespace ToDoListServiceTests.Scenarios.Steps
 
             sut = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
         }
+        public async Task Update_A_ToDoList_Item_that_Is_Invalid()
+        {
+            var data = new ToDoListItems
+            {
+                Id = 1,
+                Priority = "High",
+                Task = ""
+
+            };
+
+            sut = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+
+        }
 
         public async Task Update_A_ToDoList_Item()
         {
@@ -88,7 +101,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
             var data = new ToDoListItems
             {
                 Id = 4,
-                Task = "The gym at 9pm",
+                Task = "added Via service Test",
                 Priority = "High",
                 Status = "Complete"
             };
