@@ -79,8 +79,61 @@ namespace ToDoListServiceTests.Scenarios.Steps
             };
 
             sut = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
-
         }
+        public async Task Update_A_ToDoList_Item_that_Contains_One_character()
+        {
+            var data = new ToDoListItems
+            {
+                Id = 1,
+                Priority = "High",
+                Task = "a"
+
+            };
+
+            sut = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+        }
+        public async Task Update_A_ToDoList_Item_that_Contains_250_character()
+        {
+            var data = new ToDoListItems
+            {
+                Id = 1,
+                Priority = "High",
+                Task = "jdhlkjagdjahglkjdgakjgdkj" +
+                       "agdkjgakjgdkajgdkjgakdjga" +
+                       "kgdkjagkjgadkjga" +
+                       "kdjakjgdjdhlkjagdjahglkjdga" +
+                       "kjgdkjagdkjgakjgdkajgdkjgak" +
+                       "djgakgdkjagkjgadkjgakdjakjgdjdh" +
+                       "lkjagdjahglkjdgakjgdkjagdkjgakjg" +
+                       "dkajgdkjgakdjgakgdkjagkjgadkjgakdjakj" +
+                       "gdakgdkjagkjgadkjgakdjakjgdsss"
+
+            };
+
+            sut = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+        }
+
+        public async Task Update_A_ToDoList_Item_that_Contains_251_character()
+        {
+            var data = new ToDoListItems
+            {
+                Id = 1,
+                Priority = "High",
+                Task = "jdhlkjagdjahglkjdgakjgdkj" +
+                       "agdkjgakjgdkajgdkjgakdjga" +
+                       "kgdkjagkjgadkjga" +
+                       "kdjakjgdjdhlkjagdjahglkjdga" +
+                       "kjgdkjagdkjgakjgdkajgdkjgak" +
+                       "djgakgdkjagkjgadkjgakdjakjgdjdh" +
+                       "lkjagdjahglkjdgakjgdkjagdkjgakjg" +
+                       "dkajgdkjgakdjgakgdkjagkjgadkjgakdjakj" +
+                       "gdakgdkjagkjgadkjgakdjakjgdsass"
+
+            };
+
+            sut = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));
+        }
+
 
         public async Task Update_A_ToDoList_Item()
         {
