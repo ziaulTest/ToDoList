@@ -23,9 +23,10 @@ namespace ToDoList.unitTest
                 Task = "do this test"
             };
             var todoMock = new Mock<IToDoRepository>();
+             var metricsMock = new Mock<IMetricsTrackerRepository>();
             todoMock.Setup(x => x.InsertToDoList(todolist));
 
-            var controller = new ToDoListController(todoMock.Object);
+            var controller = new ToDoListController(todoMock.Object, metricsMock.Object);
             result = controller.PostToDoList(todolist);
         }
 
