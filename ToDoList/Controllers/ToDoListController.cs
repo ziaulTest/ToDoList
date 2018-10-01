@@ -34,11 +34,12 @@ namespace ToDoList.Controllers
         [HttpPost("{id}", Name = "Post")]
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
-            metricsTracker.TrackTrace("Post Successful");
+           // metricsTracker.TrackTrace("Post Successful");
+            metricsTracker.EventTracker("Event post successful");
+            
             if (returnList == null)
             {
-                //metricsTracker.EventTracker("return list is null");
-                //metricsTracker.TrackTrace("check" + BadRequest());  
+                
                 return BadRequest();
             }
             toDoLisToDoRepository.InsertToDoList(returnList);
