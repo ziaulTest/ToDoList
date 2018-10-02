@@ -34,7 +34,8 @@ namespace ToDoList
                 fv.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
             services.AddSingleton<IToDoRepository, ToDoRepository>();
-            services.AddSingleton<IMetricsTrackerRepository, MetricsTracker>();
+            services.AddSingleton<IMetricsTrackerRepository, MetricsTrackerRepository>();
+            services.AddSingleton<IDocumentDbRepository, DbRepository>();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

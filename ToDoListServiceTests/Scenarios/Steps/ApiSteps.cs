@@ -60,7 +60,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                Id = 4,
+                id = "4",
                 Task = "added Via service Test",
                 Priority = "High",
                 Status = "Complete"
@@ -72,7 +72,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                Id = 1,
+                id = "1",
                 Priority = "High",
                 Task = ""
 
@@ -84,7 +84,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                Id = 1,
+                id = "1",
                 Priority = "High",
                 Task = "a"
 
@@ -96,7 +96,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                Id = 1,
+                id = "1",
                 Priority = "High",
                 Task = "jdhlkjagdjahglkjdgakjgdkj" +
                        "agdkjgakjgdkajgdkjgakdjga" +
@@ -117,7 +117,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                Id = 1,
+                id = "1",
                 Priority = "High",
                 Task = "jdhlkjagdjahglkjdgakjgdkj" +
                        "agdkjgakjgdkajgdkjgakdjga" +
@@ -139,7 +139,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                Id = 1,
+                id = "1",
                 Priority = "High",
                 Task = "added Via service Test"
 
@@ -153,7 +153,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                Id = 4,
+                id = "4",
                 Task = "added Via service Test",
                 Priority = "High",
                 Status = "Complete"
@@ -166,7 +166,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                Id = 1,
+                id = "1",
                 Task = "tass",
                 Priority = "High"
             };
