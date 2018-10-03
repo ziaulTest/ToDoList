@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Interface;
 using ToDoList.Models;
@@ -36,11 +36,12 @@ namespace ToDoList.Controllers
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
            // metricsTracker.TrackTrace("Post Successful");
+  
             metricsTracker.EventTracker("Event post successful");
             
             if (returnList == null)
             {
-                
+               
                 return BadRequest();
             }
             toDoLisToDoRepository.InsertToDoList(returnList);

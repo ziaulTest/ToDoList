@@ -28,11 +28,7 @@ namespace ToDoList.Interface
         public List<DocumentCollection> GetListDataStores()
         {
             var collections = _client.CreateAttachmentQuery<DocumentCollection>("Items", "SELECT * FROM c").ToList();
-
             return collections;
-            //List<DocumentCollection> collections = _client.CreateDocumentCollectionQuery(DatabaseName).ToList();
-            //_client.CreateDatabaseQuery("SELECT * FROM d WHERE d.id = \"[ToDoList]\"").AsEnumerable().First();
-            //return collections;
         }
 
         public async Task<Document> GetById(string id)
