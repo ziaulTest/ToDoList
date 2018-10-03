@@ -13,7 +13,9 @@ namespace ToDoList.Interface
 
         public ToDoListItems GetById(int id)
         {
-            var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id.ToString());
+
+            var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.id == id.ToString());
+
             return toDoListItem;
         }
 
@@ -21,7 +23,7 @@ namespace ToDoList.Interface
         {
             var final = new ToDoListItems()
             {
-                Id = toDoListItems.Id,
+                id = toDoListItems.id,
                 Priority = toDoListItems.Priority,
                 Status = toDoListItems.Status,
                 Task = toDoListItems.Task
@@ -38,7 +40,9 @@ namespace ToDoList.Interface
 
         public void UpdateToDoList(int id,PartialToDoItems toDoListItems)
         {
+
             var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id.ToString());
+
             if (toDoListItem == null) return;
             toDoListItem.Priority = toDoListItems.Priority;
             toDoListItem.Task = toDoListItems.Task;

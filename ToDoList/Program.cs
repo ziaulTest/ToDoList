@@ -14,5 +14,6 @@ namespace ToDoList
             WebHost.CreateDefaultBuilder(args)
                 .UseApplicationInsights()
                 .UseStartup<Startup>();
+
     }
 }

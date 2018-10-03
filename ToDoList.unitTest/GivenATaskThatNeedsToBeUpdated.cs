@@ -20,7 +20,9 @@ namespace ToDoList.unitTest
             var metricsMock = new  Mock<IMetricsTrackerRepository>();
             var old = new ToDoListItems
             {
+
                 Id = "1",
+
                 Priority = "Priority",
                 Task = "Task"
             };

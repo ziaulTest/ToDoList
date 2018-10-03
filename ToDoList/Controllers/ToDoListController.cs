@@ -10,10 +10,14 @@ namespace ToDoList.Controllers
     {
         private readonly IToDoRepository toDoLisToDoRepository;
         private readonly IMetricsTrackerRepository metricsTracker;
-        public ToDoListController(IToDoRepository toDoLisToDoRepository, IMetricsTrackerRepository metricsTracker)
+        private readonly IDocumentDbRepository documentDbRepository;
+        // readonly DbRepository dbrepo;
+
+        public ToDoListController(IToDoRepository toDoLisToDoRepository, IMetricsTrackerRepository metricsTracker, IDocumentDbRepository documentDbRepository)
         {
             this.toDoLisToDoRepository = toDoLisToDoRepository;
             this.metricsTracker = metricsTracker;
+            this.documentDbRepository = documentDbRepository;
         }
 
         [HttpGet]
@@ -35,17 +39,21 @@ namespace ToDoList.Controllers
         [HttpPost("{id}", Name = "Post")]
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
-           // metricsTracker.TrackTrace("Post Successful");
   
             metricsTracker.EventTracker("Event post successful");
-            
+
             if (returnList == null)
             {
                
                 return BadRequest();
             }
-            toDoLisToDoRepository.InsertToDoList(returnList);
-            return CreatedAtRoute("Get", returnList);
+
+            var a = dbrepo.CreateItemAsync(returnList);
+            a.Wait();
+            var result = a.Result;
+
+            //toDoLisToDoRepository.InsertToDoList(returnList);
+            return CreatedAtRoute("Get", result);
         }
 
         [HttpPut("{id}", Name = "Put")]
