@@ -1,18 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.Azure.Documents;
 using ToDoList.Models;
 
 namespace ToDoList.Interface
 {
     public interface IToDoRepository
     {
-        List<ToDoListItems> GetListDataStores();
+        List<DocumentCollection> GetListDataStores();
 
-        ToDoListItems GetById(int id);
+        Task<Document> GetById(string id);
 
-        void InsertToDoList(ToDoListItems toDoListItems);
+        Task<Document> InsertToDoList(ToDoListItems toDoListItems);
 
-        void DeleteById(int id);
+        Task DeleteById(string id);
 
-        void UpdateToDoList(int id, PartialToDoItems toDoListItems);
+        Task<Document> UpdateToDoList(string id, PartialToDoItems toDoListItems);
     }
 }

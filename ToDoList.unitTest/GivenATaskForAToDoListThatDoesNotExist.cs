@@ -17,7 +17,7 @@ namespace ToDoList.unitTest
         {
             var todoMock = new Mock<IToDoRepository>();
              var metricsMock = new Mock<IMetricsTrackerRepository>();
-            todoMock.Setup(x => x.GetById(50));
+            todoMock.Setup(x => x.GetById("50"));
 
             sut = new ToDoListController(todoMock.Object, metricsMock.Object);
         }
@@ -25,14 +25,14 @@ namespace ToDoList.unitTest
         [Test]
         public void Then_The_ToDoList_Is_Not_Found()
         {
-            result = sut.GetToDoList(50);
+            result = sut.GetToDoList("50");
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
         [Test]
         public void Then_Check_If_Object_Is_Not_Found()
         {
-            result = sut.GetToDoList(50);
+            result = sut.GetToDoList("50");
             if (result is OkObjectResult okObjectResult) Assert.IsNull(okObjectResult.Value);
         }
     }

@@ -6,7 +6,7 @@ namespace ToDoList.Models
     public class ToDoListItems
     {
         [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [JsonProperty(PropertyName = "Task")]
         public string Task { get; set; }
         [JsonProperty(PropertyName = "Priority")]

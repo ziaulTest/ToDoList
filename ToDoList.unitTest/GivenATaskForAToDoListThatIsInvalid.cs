@@ -28,7 +28,7 @@ namespace ToDoList.unitTest
             public void When_Trying_to_Call_An_Invalid_Task()
             {
                 todomock = new Mock<IToDoRepository>();
-                todomock.Setup(repository => repository.GetById(50));
+                todomock.Setup(repository => repository.GetById("50"));
 
                 sut = new ToDoListController(todomock.Object, metricMock.Object);
             }

@@ -25,28 +25,28 @@ namespace ToDoList.unitTest
             {
                 new ToDoListItems()
                 {
-                    Id = 1,
+                    Id = "1",
                     Priority = "high",
                     Status = "started",
                     Task = "complete this test"
                 },
                 new ToDoListItems()
                 {
-                    Id = 2,
+                    Id = "2",
                     Priority = "high",
                     Status = "started",
                     Task = "complete this test2222"
                 },
                 new ToDoListItems()
                 {
-                    Id = 3,
+                    Id = "3",
                     Priority = "low",
                     Status = "done",
                     Task = "complete this test3333"
                 }
             };
 
-            todoMock.Setup(x => x.GetListDataStores()).Returns(fakeList);
+          //  todoMock.Setup(x => x.GetListDataStores(fakeList);
             sut = new ToDoListController(todoMock.Object, metricsMock.Object);
         }
 
