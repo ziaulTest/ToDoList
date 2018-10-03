@@ -60,7 +60,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                id = "4",
+                Id = "4",
                 Task = "added Via service Test",
                 Priority = "High",
                 Status = "Complete"
@@ -72,7 +72,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                id = "1",
+                Id = "1",
                 Priority = "High",
                 Task = ""
 
@@ -84,7 +84,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                id = "1",
+                Id = "1",
                 Priority = "High",
                 Task = "a"
 
@@ -96,6 +96,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
+
                 id = "1",
                 Priority = "High",
                 Task = "jdhlkjagdjahglkjdgakjgdkj" +
@@ -117,7 +118,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                id = "1",
+                Id = "1",
                 Priority = "High",
                 Task = "jdhlkjagdjahglkjdgakjgdkj" +
                        "agdkjgakjgdkajgdkjgakdjga" +
@@ -139,6 +140,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
+
                 id = "1",
                 Priority = "High",
                 Task = "added Via service Test"
@@ -153,6 +155,7 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
+
                 id = "4",
                 Task = "added Via service Test",
                 Priority = "High",
@@ -166,9 +169,9 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-                id = "1",
-                Task = "tass",
-                Priority = "High"
+               id = "1",
+               Task = "tass",
+               Priority = "High"
             };
 
             sut = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));

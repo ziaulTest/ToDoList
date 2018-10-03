@@ -22,6 +22,8 @@ namespace ToDoList.unitTest
             {
                 var todoMock = new Mock<IToDoRepository>();
                 Mock<IMetricsTrackerRepository> metricsMock = new Mock<IMetricsTrackerRepository>();
+
+
                 todoMock.Setup(x => x.GetById(1)).Returns(new ToDoListItems
                 {
                     id = "1",
@@ -30,8 +32,9 @@ namespace ToDoList.unitTest
                     Task = "Test this Moq"
                 });
 
+
                 sut = new ToDoListController(todoMock.Object, metricsMock.Object);
-                _result = sut.GetToDoList(1);
+                _result = sut.GetToDoList("1");
             }
 
             [Test]
@@ -44,7 +47,7 @@ namespace ToDoList.unitTest
             [Test]
             public void When_Calling_A_Single_ToDoList__Then__The_Values_Are_Checked()
             {
-                _result = sut.GetToDoList(1);
+                _result = sut.GetToDoList("1");
                 Assert.IsInstanceOf<OkObjectResult>(_result);
             }
         }

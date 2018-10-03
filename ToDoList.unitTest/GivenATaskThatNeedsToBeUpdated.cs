@@ -20,22 +20,24 @@ namespace ToDoList.unitTest
             var metricsMock = new  Mock<IMetricsTrackerRepository>();
             var old = new ToDoListItems
             {
-                id = "1",
+
+                Id = "1",
+
                 Priority = "Priority",
                 Task = "Task"
             };
 
-            mockRepository.Setup(x => x.GetById(It.Is<int>(i => i == 1))).Returns(old);
-            mockRepository.Setup(x => x.UpdateToDoList(It.Is<int>(i => i == 1), It.IsAny<PartialToDoItems>()));
+          //  mockRepository.Setup(x => x.GetById(It.Is<string>(i => i == "1"))).Returns(old);
+            mockRepository.Setup(x => x.UpdateToDoList(It.Is<string>(i => i == "1"), It.IsAny<PartialToDoItems>()));
             sut = new ToDoListController(mockRepository.Object, metricsMock.Object);
         }
 
         [Test]
         public void When_Updating_A_Task_Then_The_Item_Is_Updated()
         {
-            result = sut.PartiallyUpdate(1, new PartialToDoItems()
+            result = sut.PartiallyUpdate("1", new PartialToDoItems()
             {
-                Id = 1,
+                Id = "1",
                 Priority = "updated Priority",
                 Task = "updated Task"
             });
@@ -46,10 +48,10 @@ namespace ToDoList.unitTest
         [Test]
         public void When_Updating_A_Task_That_Does_Not_Exist_Then_No_Update_Is_Performed()
         {
-            const int unknownTodoItem = 10;
-            result = sut.PartiallyUpdate(unknownTodoItem, new PartialToDoItems()
+   
+            result = sut.PartiallyUpdate("10", new PartialToDoItems()
             {
-                Id = unknownTodoItem,
+                Id = "10",
                 Priority = "updated Priority",
                 Task = "updated Task"
             });

@@ -32,8 +32,9 @@ namespace ToDoList.unitTest
                 Status = "hahaha",
                 Task = "hahaha"
             })));
+
             
-            _todomock.Setup(x => x.DeleteById(1));
+            _todomock.Setup(x => x.DeleteById("1"));
             
             sut = new ToDoListController(_todomock.Object,metricsMock.Object);
         }
@@ -41,7 +42,7 @@ namespace ToDoList.unitTest
         [Test]
         public void When_Trying_To_Delete_A_Task__Then_The_Task_Is_Deleted()
         {
-            _result = sut.DeleteList(1);
+            _result = sut.DeleteList("1");
             Assert.IsInstanceOf<NoContentResult>(_result);
         }
 
@@ -49,8 +50,8 @@ namespace ToDoList.unitTest
         [Test]
         public void Then_The_Specified_List_Is_Checked_For_Deletion()
         {
-            _result = sut.DeleteList(1);
-            _todomock.Verify(r => r.DeleteById(1));
+            _result = sut.DeleteList("1");
+            _todomock.Verify(r => r.DeleteById("1"));
         }
     }
 }

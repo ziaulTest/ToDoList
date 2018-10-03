@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.AspNetCore.Mvc;
 using ToDoList.Interface;
 using ToDoList.Models;
 
@@ -26,7 +27,7 @@ namespace ToDoList.Controllers
         }
 
         [HttpGet("{id}", Name = "Get")]
-        public IActionResult GetToDoList(int id)
+        public IActionResult GetToDoList(string id)
         {
 
             var listToReturn = toDoLisToDoRepository.GetById(id);
@@ -38,11 +39,12 @@ namespace ToDoList.Controllers
         [HttpPost("{id}", Name = "Post")]
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
-           metricsTracker.EventTracker("Event post successful");
-            
+  
+            metricsTracker.EventTracker("Event post successful");
+
             if (returnList == null)
             {
-                
+               
                 return BadRequest();
             }
 
@@ -55,7 +57,7 @@ namespace ToDoList.Controllers
         }
 
         [HttpPut("{id}", Name = "Put")]
-        public IActionResult PartiallyUpdate(int id, [FromBody] PartialToDoItems returnList)
+        public IActionResult PartiallyUpdate(string id, [FromBody] PartialToDoItems returnList)
         {
             if (returnList == null)
             {
@@ -67,7 +69,7 @@ namespace ToDoList.Controllers
         }
 
         [HttpDelete("{id}", Name = "Delete")]
-        public IActionResult DeleteList(int id)
+        public IActionResult DeleteList(string id)
         {
             toDoLisToDoRepository.DeleteById(id);
             return NoContent();
