@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
@@ -25,10 +24,9 @@ namespace ToDoList.Interface
             _client.Dispose();
         }
 
-        public List<DocumentCollection> GetListDataStores()
+        public IOrderedQueryable<Document> GetListDataStores()
         {
-            var collections = _client.CreateAttachmentQuery<DocumentCollection>("Items", "SELECT * FROM c").ToList();
-            return collections;
+            return _client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri(DatabaseName, "Items"));
         }
 
         public async Task<Document> GetById(string id)
