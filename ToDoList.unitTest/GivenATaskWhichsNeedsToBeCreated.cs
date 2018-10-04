@@ -17,7 +17,7 @@ namespace ToDoList.unitTest
         {
             var todolist = new ToDoListItems
             {
-                id = "4",
+                Id = "4",
                 Priority = "high",
                 Status = "Done",
                 Task = "do this test"

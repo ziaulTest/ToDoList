@@ -1,5 +1,4 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ToDoList.Interface;
 using ToDoList.Models;
 
@@ -10,14 +9,12 @@ namespace ToDoList.Controllers
     {
         private readonly IToDoRepository toDoLisToDoRepository;
         private readonly IMetricsTrackerRepository metricsTracker;
-        private readonly IDocumentDbRepository documentDbRepository;
-        // readonly DbRepository dbrepo;
-
-        public ToDoListController(IToDoRepository toDoLisToDoRepository, IMetricsTrackerRepository metricsTracker, IDocumentDbRepository documentDbRepository)
+   
+        public ToDoListController(IToDoRepository toDoLisToDoRepository, IMetricsTrackerRepository metricsTracker)
         {
             this.toDoLisToDoRepository = toDoLisToDoRepository;
             this.metricsTracker = metricsTracker;
-            this.documentDbRepository = documentDbRepository;
+
         }
 
         [HttpGet]
@@ -47,13 +44,8 @@ namespace ToDoList.Controllers
                
                 return BadRequest();
             }
-
-            var a = dbrepo.CreateItemAsync(returnList);
-            a.Wait();
-            var result = a.Result;
-
-            //toDoLisToDoRepository.InsertToDoList(returnList);
-            return CreatedAtRoute("Get", result);
+            toDoLisToDoRepository.InsertToDoList(returnList);
+            return CreatedAtRoute("Get", returnList);
         }
 
         [HttpPut("{id}", Name = "Put")]
