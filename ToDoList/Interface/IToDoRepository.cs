@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
 using ToDoList.Models;
@@ -7,7 +8,7 @@ namespace ToDoList.Interface
 {
     public interface IToDoRepository
     {
-        List<DocumentCollection> GetListDataStores();
+        IOrderedQueryable<Document> GetListDataStores();
 
         Task<Document> GetById(string id);
 

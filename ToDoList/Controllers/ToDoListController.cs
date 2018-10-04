@@ -1,5 +1,4 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ToDoList.Interface;
 using ToDoList.Models;
 
@@ -35,9 +34,7 @@ namespace ToDoList.Controllers
         [HttpPost("{id}", Name = "Post")]
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
-           // metricsTracker.TrackTrace("Post Successful");
-  
-            metricsTracker.EventTracker("Event post successful");
+           metricsTracker.EventTracker("Event post successful");
             
             if (returnList == null)
             {

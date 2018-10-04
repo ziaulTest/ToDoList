@@ -18,16 +18,11 @@ namespace ToDoList.unitTest
             private Mock<IMetricsTrackerRepository> metricMock;
             private ToDoListController sut;
 
-            //public GivenATaskForAToDoListThatIsInvalid(Mock<IToDoRepository> todomock, Mock<IMetricsTrackerRepository> metricMock)
-            //{
-            //    this.todomock = todomock;
-            //    this.metricMock = metricMock;
-            //}
-
             [SetUp]
             public void When_Trying_to_Call_An_Invalid_Task()
             {
                 todomock = new Mock<IToDoRepository>();
+                metricMock = new Mock<IMetricsTrackerRepository>();
                 todomock.Setup(repository => repository.GetById("50"));
 
                 sut = new ToDoListController(todomock.Object, metricMock.Object);
