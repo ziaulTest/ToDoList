@@ -25,13 +25,14 @@ namespace ToDoList.unitTest
         public void SetUp()
         {
             _todomock = new Mock<IToDoRepository>();
-            //_todomock.Setup(x => x.InsertToDoList((new ToDoListItems
-            //{
-            //    Id = 1,
-            //    Priority = "haha",
-            //    Status = "hahaha",
-            //    Task = "hahaha"
-            //})));
+            _todomock.Setup(x => x.InsertToDoList((new ToDoListItems
+            {
+                id = "1",
+                Priority = "haha",
+                Status = "hahaha",
+                Task = "hahaha"
+            })));
+
             
             _todomock.Setup(x => x.DeleteById("1"));
             

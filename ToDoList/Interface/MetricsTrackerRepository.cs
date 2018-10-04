@@ -3,11 +3,11 @@ using Microsoft.ApplicationInsights;
 
 namespace ToDoList.Interface
 {
-    public class MetricsTracker : IMetricsTrackerRepository
+    public class MetricsTrackerRepository : IMetricsTrackerRepository
     {
         private readonly TelemetryClient telemetryClient;
 
-        public MetricsTracker(TelemetryClient telemetryClient)
+        public MetricsTrackerRepository(TelemetryClient telemetryClient)
         {
             this.telemetryClient = telemetryClient ?? throw new ArgumentNullException(nameof(telemetryClient));
         }

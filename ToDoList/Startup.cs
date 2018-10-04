@@ -33,6 +33,7 @@ namespace ToDoList
             {
                 fv.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
+
             services.AddSingleton<IToDoRepository, CosmosToDoRepository>();
             services.AddSingleton<IMetricsTrackerRepository, MetricsTracker>();
         }
