@@ -35,7 +35,7 @@ namespace ToDoList
             });
 
             services.AddSingleton<IToDoRepository, CosmosToDoRepository>();
-            services.AddSingleton<IMetricsTrackerRepository, MetricsTracker>();
+            services.AddSingleton<IMetricsTrackerRepository, MetricsTrackerRepository>();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

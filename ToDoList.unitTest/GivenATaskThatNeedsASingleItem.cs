@@ -24,13 +24,13 @@ namespace ToDoList.unitTest
                 Mock<IMetricsTrackerRepository> metricsMock = new Mock<IMetricsTrackerRepository>();
 
 
-                todoMock.Setup(x => x.GetById(1)).Returns(new ToDoListItems
-                {
-                    id = "1",
-                    Priority = "High",
-                    Status = "Complete",
-                    Task = "Test this Moq"
-                });
+                //todoMock.Setup(x => x.GetById(1.ToString())).Returns(new ToDoListItems
+                //{
+                //    Id = "1",
+                //    Priority = "High",
+                //    Status = "Complete",
+                //    Task = "Test this Moq"
+                //});
 
 
                 sut = new ToDoListController(todoMock.Object, metricsMock.Object);

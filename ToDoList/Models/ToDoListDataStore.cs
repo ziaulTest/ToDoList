@@ -14,21 +14,21 @@ namespace ToDoList.Models
             {
                 new ToDoListItems()
                 {
-                    id = "1",
+                    Id = "1",
                     Priority = "high",
                     Task = "Wake up at 9am",
                     Status = "In Progress",
                 },
                 new ToDoListItems()
                 {
-                    id = "2",
+                    Id = "2",
                     Priority = "low",
                     Task = "sleep at 8pm",
                     Status = "In Progress"
                 },
                 new ToDoListItems()
                 {
-                    id = "3",
+                    Id = "3",
                     Priority = "middle",
                     Task = "take the dog for a walk",
                     Status = "done"
