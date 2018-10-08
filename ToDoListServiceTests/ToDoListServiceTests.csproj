@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.1.2" />
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="1.10.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="MSBuild.Microsoft.VisualStudio.Web.targets" Version="14.0.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="NUnit" Version="3.10.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />

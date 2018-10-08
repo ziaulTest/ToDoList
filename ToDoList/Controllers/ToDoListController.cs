@@ -14,7 +14,6 @@ namespace ToDoList.Controllers
         {
             this.toDoLisToDoRepository = toDoLisToDoRepository;
             this.metricsTracker = metricsTracker;
-
         }
 
         [HttpGet]
@@ -26,7 +25,6 @@ namespace ToDoList.Controllers
         [HttpGet("{id}", Name = "Get")]
         public IActionResult GetToDoList(string id)
         {
-
             var listToReturn = toDoLisToDoRepository.GetById(id);
 
             if (listToReturn != null) return Ok(listToReturn);
@@ -36,12 +34,10 @@ namespace ToDoList.Controllers
         [HttpPost("{id}", Name = "Post")]
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
-  
             metricsTracker.EventTracker("Event post successful");
 
             if (returnList == null)
-            {
-               
+            {           
                 return BadRequest();
             }
             toDoLisToDoRepository.InsertToDoList(returnList);
