@@ -9,7 +9,7 @@ namespace ToDoList.Controllers
     {
         private readonly IToDoRepository toDoLisToDoRepository;
         private readonly IMetricsTrackerRepository metricsTracker;
-   
+
         public ToDoListController(IToDoRepository toDoLisToDoRepository, IMetricsTrackerRepository metricsTracker)
         {
             this.toDoLisToDoRepository = toDoLisToDoRepository;
@@ -40,6 +40,7 @@ namespace ToDoList.Controllers
             {           
                 return BadRequest();
             }
+
             toDoLisToDoRepository.InsertToDoList(returnList);
             return CreatedAtRoute("Get", returnList);
         }
