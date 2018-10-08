@@ -8,7 +8,7 @@
 //using ToDoList.Controllers;
 //using ToDoList.Interface;
 //using ToDoList.Models;
-
+// COME BACK HERE
 //namespace ToDoList.unitTest
 //{
 //    [TestFixture]
@@ -21,11 +21,7 @@
 //        public void SetUp()
 //        {
 //            var mockRepository = new Mock<IToDoRepository>();
-//            var metricsMock = new  Mock<IMetricsTrackerRepository>();
-
-//            //client.As<IDocumentClient>()
-//            //    .Setup(foo => foo.CreateDocumentQuery<MyDocumentClass>(It.IsAny<Uri>(), It.IsAny<FeedOptions>()))
-//            //    .Returns(data);
+//            var metricsMock = new Mock<IMetricsTrackerRepository>();
 
 //            var old = new ToDoListItems
 //            {
@@ -34,7 +30,7 @@
 //                Task = "Task"
 //            };
 
-//          //  mockRepository.Setup(x => x.GetById(It.Is<string>(i => i == "1"))).Returns(old);
+//         //   mockRepository.Setup(x => x.GetById(It.Is<string>(i => i == "1"))).Returns(old);
 //            mockRepository.Setup(x => x.UpdateToDoList(It.Is<string>(i => i == "1"), It.IsAny<PartialToDoItems>()));
 //            sut = new ToDoListController(mockRepository.Object, metricsMock.Object);
 //        }
@@ -55,7 +51,7 @@
 //        [Test]
 //        public void When_Updating_A_Task_That_Does_Not_Exist_Then_No_Update_Is_Performed()
 //        {
-   
+
 //            result = sut.PartiallyUpdate("10", new PartialToDoItems()
 //            {
 //                Id = "10",
