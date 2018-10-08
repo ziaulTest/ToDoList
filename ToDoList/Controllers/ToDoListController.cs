@@ -1,5 +1,4 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ToDoList.Interface;
 using ToDoList.Models;
 
@@ -10,7 +9,6 @@ namespace ToDoList.Controllers
     {
         private readonly IToDoRepository toDoLisToDoRepository;
         private readonly IMetricsTrackerRepository metricsTracker;
-
 
         public ToDoListController(IToDoRepository toDoLisToDoRepository, IMetricsTrackerRepository metricsTracker)
         {
@@ -27,7 +25,6 @@ namespace ToDoList.Controllers
         [HttpGet("{id}", Name = "Get")]
         public IActionResult GetToDoList(string id)
         {
-
             var listToReturn = toDoLisToDoRepository.GetById(id);
 
             if (listToReturn != null) return Ok(listToReturn);
@@ -37,15 +34,13 @@ namespace ToDoList.Controllers
         [HttpPost("{id}", Name = "Post")]
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
-  
             metricsTracker.EventTracker("Event post successful");
 
             if (returnList == null)
-            {
-               
+            {           
                 return BadRequest();
             }
-            
+
             toDoLisToDoRepository.InsertToDoList(returnList);
             return CreatedAtRoute("Get", returnList);
         }

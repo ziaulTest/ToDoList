@@ -12,7 +12,6 @@ namespace ToDoList.Interface
         private const string EndpointUri = "https://to-dolist.documents.azure.com:443/";
         private const string PrimaryKey = "9XgxGAlkkplAXQvZo6nMI7OzjVqwS3hqFV9SCERK66NOl6RlNzo14jkgH5bitrBSQOQYZ1IqBvHQbuSoKak6cg==";
         private readonly DocumentClient _client;
-        private readonly string DatabaseName = "ToDoList";
 
         public CosmosToDoRepository()
         {
@@ -26,7 +25,7 @@ namespace ToDoList.Interface
 
         public IOrderedQueryable<Document> GetListDataStores()
         {
-            return _client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri(DatabaseName, "Items"));
+            return _client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri("ToDoList", "Items"));
         }
 
         public async Task<Document> GetById(string id)
@@ -48,7 +47,5 @@ namespace ToDoList.Interface
         {
             return await _client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri("ToDoList", "Items", id), toDoListItems);
         }
-
-
     }
 }
