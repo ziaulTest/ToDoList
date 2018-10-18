@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+using Microsoft.Azure.Documents.Linq;
 using ToDoList.Models;
 
 namespace ToDoList.Interface
@@ -25,14 +27,24 @@ namespace ToDoList.Interface
             _client.Dispose();
         }
 
-        public IOrderedQueryable<Document> GetListDataStores()
+        //public async Task<List<BasicTask>> Read(string userId)
+        //{
+        //    var taskQuery = this.client.CreateDocumentQuery<BasicTask>(UriFactory.CreateDocumentCollectionUri("Task", "Items"), this.queryOptions)
+        //        .Where(t => t.UserId == userId)
+        //        .AsDocumentQuery();
+
+        //    return (await taskQuery.ExecuteNextAsync<BasicTask>()).ToList();
+        //}
+        public async Task<List<ToDoListItems>> GetListDataStores()
         {
-            return _client.CreateDocumentQuery(UriFactory.CreateDocumentCollectionUri("ToDoList", "Items"));
+            var DB_Collection = _client.CreateDocumentQuery<ToDoListItems>(UriFactory.CreateDocumentCollectionUri("ToDoList", "Items")).AsDocumentQuery();
+            return (await DB_Collection.ExecuteNextAsync<ToDoListItems>()).ToList();
         }
 
-        public async Task<Document> GetById(string id)
+
+        public async Task<ToDoListItems> GetById(string id)
         {
-            return await _client.ReadDocumentAsync(UriFactory.CreateDocumentUri("ToDoList", "Items", id));
+            return (await _client.ReadDocumentAsync<ToDoListItems>(UriFactory.CreateDocumentUri("ToDoList", "Items", id)));
         }
 
         public async Task<Document> InsertToDoList(ToDoListItems toDoListItems)
