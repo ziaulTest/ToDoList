@@ -1,8 +1,5 @@
-﻿//using System;
-//using System.Threading.Tasks;
+﻿//using System.Threading.Tasks;
 //using Microsoft.AspNetCore.Mvc;
-//using Microsoft.Azure.Documents;
-//using Microsoft.Azure.Documents.Client;
 //using Moq;
 //using NUnit.Framework;
 //using ToDoList.Controllers;
@@ -31,7 +28,7 @@
 //            };
 
 
-//           // mockRepository.Setup(x => x.GetById(It.Is<string>(i => i == "1".ToString()))).Returns(old);
+//          //  mockRepository.Setup(x => x.GetById(It.Is<string>(i => i == "1".ToString()))).Returns();
 //            mockRepository.Setup(x => x.UpdateToDoList(It.Is<string>(i => i == "1"), It.IsAny<PartialToDoItems>()));
 //            sut = new ToDoListController(mockRepository.Object, metricsMock.Object);
 //        }
