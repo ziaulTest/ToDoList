@@ -13,6 +13,7 @@ namespace ToDoList.Filters
                 await next.Invoke();
                 return;
             }
+
             var errors = context.ModelState;
             context.Result = new BadRequestObjectResult(errors);
         }

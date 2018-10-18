@@ -15,7 +15,7 @@ namespace ToDoList.Interface
         public void EventTracker(string str)
         {
 
-            telemetryClient.TrackEvent("");
+            telemetryClient.TrackEvent(str);
         }
 
         public void LogException(Exception ex)
@@ -25,7 +25,7 @@ namespace ToDoList.Interface
 
         public void TrackTrace(string str)
         {
-            telemetryClient.TrackTrace("");
+            telemetryClient.TrackTrace(str);
         }
 
     }
