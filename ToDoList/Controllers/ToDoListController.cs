@@ -34,6 +34,7 @@ namespace ToDoList.Controllers
         [HttpPost("{id}", Name = "Post")]
         public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
         {
+
             metricsTracker.EventTracker("Event post successful");
 
             if (returnList == null)

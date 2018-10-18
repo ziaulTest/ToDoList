@@ -9,8 +9,10 @@ namespace ToDoList.Interface
 {
     public class CosmosToDoRepository : IToDoRepository
     {
-        private const string EndpointUri = "https://to-dolist.documents.azure.com:443/";
-        private const string PrimaryKey = "9XgxGAlkkplAXQvZo6nMI7OzjVqwS3hqFV9SCERK66NOl6RlNzo14jkgH5bitrBSQOQYZ1IqBvHQbuSoKak6cg==";
+        private const string EndpointUri = "https://bestesttodolist.documents.azure.com:443/";
+        // 9XgxGAlkkplAXQvZo6nMI7OzjVqwS3hqFV9SCERK66NOl6RlNzo14jkgH5bitrBSQOQYZ1IqBvHQbuSoKak6cg==
+        // N6RCbEOexLlnkmSeMgeg2UBBYGFjerOvAzQ2ngBvV7VirMa51wilFMLeHFqBLBSA9fhXLegnAQISKa1PMm8iTQ==
+        private const string PrimaryKey = "N6RCbEOexLlnkmSeMgeg2UBBYGFjerOvAzQ2ngBvV7VirMa51wilFMLeHFqBLBSA9fhXLegnAQISKa1PMm8iTQ==";
         private readonly DocumentClient _client;
 
         public CosmosToDoRepository()
