@@ -13,7 +13,6 @@ namespace ToDoList.Interface
     {
         private const string EndpointUri = "https://bestesttodolist.documents.azure.com:443/";
         // 9XgxGAlkkplAXQvZo6nMI7OzjVqwS3hqFV9SCERK66NOl6RlNzo14jkgH5bitrBSQOQYZ1IqBvHQbuSoKak6cg==
-        // N6RCbEOexLlnkmSeMgeg2UBBYGFjerOvAzQ2ngBvV7VirMa51wilFMLeHFqBLBSA9fhXLegnAQISKa1PMm8iTQ==
         private const string PrimaryKey = "N6RCbEOexLlnkmSeMgeg2UBBYGFjerOvAzQ2ngBvV7VirMa51wilFMLeHFqBLBSA9fhXLegnAQISKa1PMm8iTQ==";
         private readonly DocumentClient _client;
 
@@ -27,20 +26,11 @@ namespace ToDoList.Interface
             _client.Dispose();
         }
 
-        //public async Task<List<BasicTask>> Read(string userId)
-        //{
-        //    var taskQuery = this.client.CreateDocumentQuery<BasicTask>(UriFactory.CreateDocumentCollectionUri("Task", "Items"), this.queryOptions)
-        //        .Where(t => t.UserId == userId)
-        //        .AsDocumentQuery();
-
-        //    return (await taskQuery.ExecuteNextAsync<BasicTask>()).ToList();
-        //}
         public async Task<List<ToDoListItems>> GetListDataStores()
         {
             var DB_Collection = _client.CreateDocumentQuery<ToDoListItems>(UriFactory.CreateDocumentCollectionUri("ToDoList", "Items")).AsDocumentQuery();
             return (await DB_Collection.ExecuteNextAsync<ToDoListItems>()).ToList();
         }
-
 
         public async Task<ToDoListItems> GetById(string id)
         {
