@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.ChangeFeedProcessor;
 using Microsoft.Azure.Documents.Client;
+using Document = Microsoft.Azure.Documents.Document;
 
-namespace ToDoList.ChangeFeedProcessor
+namespace ChangeFeedProcessor.ChangeFeedProcessor
 {
     public class DocumentFeedObserver : IChangeFeedObserver
     {
@@ -30,6 +30,7 @@ namespace ToDoList.ChangeFeedProcessor
         {
             return Task.CompletedTask;
         }
+
 
         public Task ProcessChangesAsync(ChangeFeedObserverContext context, IReadOnlyList<Document> docs)
         {

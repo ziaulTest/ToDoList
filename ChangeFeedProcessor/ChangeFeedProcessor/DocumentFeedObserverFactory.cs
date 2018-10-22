@@ -1,7 +1,7 @@
 ﻿using Microsoft.Azure.Documents.ChangeFeedProcessor;
 using Microsoft.Azure.Documents.Client;
 
-namespace ToDoList.ChangeFeedProcessor
+namespace ChangeFeedProcessor.ChangeFeedProcessor
 {
     public class DocumentFeedObserverFactory : IChangeFeedObserverFactory
     {
