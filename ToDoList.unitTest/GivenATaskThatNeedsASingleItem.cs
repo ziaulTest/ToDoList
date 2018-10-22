@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Documents;
 using Moq;
 using NUnit.Framework;
@@ -23,14 +24,14 @@ namespace ToDoList.unitTest
             {
                 var todoMock = new Mock<IToDoRepository>();
                 Mock<IMetricsTrackerRepository> metricsMock = new Mock<IMetricsTrackerRepository>();
-            
-               //todoMock.Setup(x => x.GetById(1)).Returns(new ToDoListItems
-               // {
-               //     Id = "1",
-               //     Priority = "High",
-               //     Status = "Complete",
-               //     Task = "Test this Moq"
-               // });
+
+                todoMock.Setup(x => x.GetById("1")).Returns(Task.FromResult(new ToDoListItems
+                {
+                    Id = "1",
+                    Priority = "High",
+                    Status = "Complete",
+                    Task = "Test this Moq"
+                }));
 
                 sut = new ToDoListController(todoMock.Object, metricsMock.Object);
                 _result = sut.GetToDoList("1");

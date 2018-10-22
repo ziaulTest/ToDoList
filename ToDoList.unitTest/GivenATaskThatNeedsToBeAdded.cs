@@ -31,7 +31,7 @@ namespace ToDoList.unitTest
             result = sut.GetToDoLists();
             Assert.IsNotNull(result as OkObjectResult);
         }
-        // redundant test for now as i have external datastore, not in memory 
+        // redundant test for now as i have external datastore
 
         //[Test]
         //public void When_Get_To_DoLists_Is_Called__Then_3_Items_Are_Returned()
