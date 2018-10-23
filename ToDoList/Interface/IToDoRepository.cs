@@ -9,7 +9,6 @@ namespace ToDoList.Interface
     public interface IToDoRepository
     {
         Task<List<ToDoListItems>> GetListDataStores();
-        // IOrderedQueryable<Document> GetListDataStores();
 
         Task<ToDoListItems> GetById(string id);
 

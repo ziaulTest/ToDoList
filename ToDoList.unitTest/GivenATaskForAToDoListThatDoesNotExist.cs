@@ -16,7 +16,7 @@ namespace ToDoList.unitTest
         public void SetUp()
         {
             var todoMock = new Mock<IToDoRepository>();
-             var metricsMock = new Mock<IMetricsTrackerRepository>();
+            var metricsMock = new Mock<IMetricsTrackerRepository>();
             todoMock.Setup(x => x.GetById("50"));
 
             sut = new ToDoListController(todoMock.Object, metricsMock.Object);

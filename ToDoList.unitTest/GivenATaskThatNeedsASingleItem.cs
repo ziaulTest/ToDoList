@@ -38,7 +38,7 @@ namespace ToDoList.unitTest
             }
 
             [Test]
-            public void When_Calling_A_Single_ToDoList__Then_A_Sinlge_Item_Is_Returned()
+            public void When_Calling_A_Single_ToDoList__Then_A_Single_Item_Is_Returned()
             {
                 var okObjectResult = _result as OkObjectResult;
                 Assert.IsNotNull(okObjectResult.Value);

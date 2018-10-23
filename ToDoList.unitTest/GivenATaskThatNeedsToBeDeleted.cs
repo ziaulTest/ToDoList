@@ -30,7 +30,6 @@ namespace ToDoList.unitTest
             }));
 
             _todomock.Setup(x => x.DeleteById("1"));
-            
             sut = new ToDoListController(_todomock.Object,metricsMock.Object);
         }
 

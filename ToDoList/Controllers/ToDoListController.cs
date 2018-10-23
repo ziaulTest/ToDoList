@@ -7,61 +7,59 @@ namespace ToDoList.Controllers
     [Route("api/ToDoLists")]
     public class ToDoListController : Controller
     {
-        private readonly IToDoRepository toDoLisToDoRepository;
+        private readonly IToDoRepository repository;
         private readonly IMetricsTrackerRepository metricsTracker;
 
-        public ToDoListController(IToDoRepository toDoLisToDoRepository, IMetricsTrackerRepository metricsTracker)
+        public ToDoListController(IToDoRepository repository, IMetricsTrackerRepository metricsTracker)
         {
-            this.toDoLisToDoRepository = toDoLisToDoRepository;
+            this.repository = repository;
             this.metricsTracker = metricsTracker;
         }
 
         [HttpGet]
         public IActionResult GetToDoLists()
         {
-            return Ok(toDoLisToDoRepository.GetListDataStores());
+            return Ok(repository.GetListDataStores());
         }
 
         [HttpGet("{id}", Name = "Get")]
         public IActionResult GetToDoList(string id)
         {
-            var listToReturn = toDoLisToDoRepository.GetById(id);
+            var listToReturn = repository.GetById(id);
 
             if (listToReturn != null) return Ok(listToReturn);
             return NotFound();
         }
 
         [HttpPost("{id}", Name = "Post")]
-        public IActionResult PostToDoList([FromBody] ToDoListItems returnList)
+        public IActionResult PostToDoList([FromBody] ToDoListItems listToPost)
         {
-
-            metricsTracker.EventTracker("Event post successful");
-
-            if (returnList == null)
+            if (listToPost == null)
             {           
                 return BadRequest();
             }
 
-            toDoLisToDoRepository.InsertToDoList(returnList);
-            return CreatedAtRoute("Get", returnList);
+            repository.InsertToDoList(listToPost);
+            metricsTracker.EventTracker("Event post successful");
+            return CreatedAtRoute("Get", listToPost);
         }
 
         [HttpPut("{id}", Name = "Put")]
-        public IActionResult PartiallyUpdate(string id, [FromBody] PartialToDoItems returnList)
+        public IActionResult PartiallyUpdate(string id, [FromBody] PartialToDoItems partialUpdateList)
         {
-            if (returnList == null)
+            if (partialUpdateList == null)
             {
                 return BadRequest();
             }
 
-            toDoLisToDoRepository.UpdateToDoList(id, returnList);
+            repository.UpdateToDoList(id, partialUpdateList);
             return Ok();
         }
 
         [HttpDelete("{id}", Name = "Delete")]
         public IActionResult DeleteList(string id)
         {
-            toDoLisToDoRepository.DeleteById(id);
+            repository.DeleteById(id);
             return NoContent();
         }
     }

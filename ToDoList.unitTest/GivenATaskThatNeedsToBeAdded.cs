@@ -31,16 +31,5 @@ namespace ToDoList.unitTest
             result = sut.GetToDoLists();
             Assert.IsNotNull(result as OkObjectResult);
         }
-        // redundant test for now as i have external datastore
-
-        //[Test]
-        //public void When_Get_To_DoLists_Is_Called__Then_3_Items_Are_Returned()
-        //{
-        //    result = sut.GetToDoLists();
-        //    var toDoListItemses = (result as OkObjectResult).Value as List<ToDoListItems>;
-        //    var count = toDoListItemses.Count;
-
-        //    Assert.AreEqual(3, count);
-        //}
     }
 }

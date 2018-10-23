@@ -47,20 +47,20 @@ namespace ToDoList.unitTest
             Assert.IsInstanceOf<OkResult>(result);
         }
 
-        //[Test]
-        //public void When_Updating_A_Task_That_Does_Not_Exist_Then_No_Update_Is_Performed()
-        //{
+        [Test]
+        public void When_Updating_A_Task_That_Does_Not_Exist_Then_No_Update_Is_Performed()
+        {
 
-        //    result = sut.PartiallyUpdate("10", new PartialToDoItems()
-        //    {
-        //        Id = "10",
-        //        Priority = "updated Priority",
-        //        Task = "updated Task"
-        //    });
+            result = sut.PartiallyUpdate("10", new PartialToDoItems()
+            {
+                Id = "10",
+                Priority = "updated Priority",
+                Task = "updated Task"
+            });
 
-        //    Assert.IsNotEmpty(result.ToString());
+           // Assert.IsNotEmpty(result.ToString());
 
-        //   // Assert.IsInstanceOf<BadRequest>(result);
-        //}
+          //   Assert.IsInstanceOf<BadRequestResult>(result);
+        }
     }
 }
