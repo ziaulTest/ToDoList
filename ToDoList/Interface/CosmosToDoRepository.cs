@@ -14,6 +14,7 @@ namespace ToDoList.Interface
         private const string EndpointUri = "https://bestesttodolist.documents.azure.com:443/";
         private const string PrimaryKey = "N6RCbEOexLlnkmSeMgeg2UBBYGFjerOvAzQ2ngBvV7VirMa51wilFMLeHFqBLBSA9fhXLegnAQISKa1PMm8iTQ==";
         private readonly DocumentClient _client;
+        private readonly FeedOptions query = new FeedOptions { MaxItemCount = -1 };
 
         public CosmosToDoRepository()
         {
@@ -47,15 +48,21 @@ namespace ToDoList.Interface
             await _client.DeleteDocumentAsync(UriFactory.CreateDocumentUri("ToDoList", "Items", id));
         }
 
-        public async Task<Document> UpdateToDoList(string id, PartialToDoItems toDoListItems)
+        public async Task<bool> UpdateToDoList(string id, PartialToDoItems toDoListItems)
         {
-            return await _client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri("ToDoList", "Items", id),toDoListItems);
+            ToDoListItems query = _client.CreateDocumentQuery<ToDoListItems>(
+                    UriFactory.CreateDocumentCollectionUri("ToDoList", "Items"), this.query).Where(t => t.Id == id)
+                .AsEnumerable()
+                .FirstOrDefault();
 
-            //var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id.ToString());
+            if (query != null)
+            {
+                query.Task = toDoListItems.Task;
+                query.Priority = toDoListItems.Priority;
+            }
 
-            //if (toDoListItem == null) return;
-            //toDoListItem.Priority = toDoListItems.Priority;
-            //toDoListItem.Task = toDoListItems.Task;
+            await _client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri("ToDoList", "Items", id), toDoListItems);
+            return true;
         }
     }
 }

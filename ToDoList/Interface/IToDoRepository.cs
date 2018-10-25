@@ -15,6 +15,6 @@ namespace ToDoList.Interface
 
         Task DeleteById(string id);
 
-        Task<Document> UpdateToDoList(string id, PartialToDoItems toDoListItems);
+        Task<bool> UpdateToDoList(string id, PartialToDoItems toDoListItems);
     }
 }
