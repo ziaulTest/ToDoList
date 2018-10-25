@@ -33,12 +33,13 @@ namespace ToDoList.Interface
 
         public async Task<ToDoListItems> GetById(string id)
         {
-            return (await _client.ReadDocumentAsync<ToDoListItems>(UriFactory.CreateDocumentUri("ToDoList", "Items", id)));
+            return await _client.ReadDocumentAsync<ToDoListItems>(UriFactory.CreateDocumentUri("ToDoList", "Items", id));
         }
 
-        public async Task<Document> InsertToDoList(ToDoListItems toDoListItems)
+        public async Task<bool> InsertToDoList(ToDoListItems toDoListItems)
         {
-            return await _client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri("ToDoList", "Items"), toDoListItems);
+            await _client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri("ToDoList", "Items"), toDoListItems);
+            return true;
         }
 
         public async Task DeleteById(string id)
@@ -48,7 +49,13 @@ namespace ToDoList.Interface
 
         public async Task<Document> UpdateToDoList(string id, PartialToDoItems toDoListItems)
         {
-            return await _client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri("ToDoList", "Items", id), toDoListItems);
+            return await _client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri("ToDoList", "Items", id),toDoListItems);
+
+            //var toDoListItem = ToDoListDataStore.Current.ToDoList.FirstOrDefault(l => l.Id == id.ToString());
+
+            //if (toDoListItem == null) return;
+            //toDoListItem.Priority = toDoListItems.Priority;
+            //toDoListItem.Task = toDoListItems.Task;
         }
     }
 }

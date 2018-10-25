@@ -20,6 +20,7 @@ namespace ToDoList.Controllers
         public IActionResult GetToDoLists()
         {
             return Ok(repository.GetListDataStores());
+            
         }
 
         [HttpGet("{id}", Name = "Get")]

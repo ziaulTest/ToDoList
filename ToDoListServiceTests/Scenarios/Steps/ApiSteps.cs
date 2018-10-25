@@ -140,11 +140,9 @@ namespace ToDoListServiceTests.Scenarios.Steps
         {
             var data = new ToDoListItems
             {
-
                 Id = "1",
                 Priority = "High",
                 Task = "added Via service Test"
-
             };
 
             sut = await client.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"));

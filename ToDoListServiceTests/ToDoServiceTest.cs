@@ -28,8 +28,6 @@ namespace ToDoListServiceTests
         [Test]
         public void Get_Request()
         {
-            
-
             var response = new Uri("api/ToDoLists", UriKind.Relative);
             var sut = _client.GetAsync(response);
             var content = sut.Result.Content.ReadAsStringAsync().Result;
@@ -39,8 +37,7 @@ namespace ToDoListServiceTests
 
         [Test]
         public void Check_If_Application_Is_JSON()
-        {
-           
+        {          
             var response = new Uri("api/ToDoLists", UriKind.Relative);
             var sut = _client.GetAsync(response).GetAwaiter().GetResult();
             var typeofContentHeaders = sut.Content.Headers.ContentType.MediaType;
@@ -51,9 +48,7 @@ namespace ToDoListServiceTests
         [Test]
         public async Task test_In_Store_Memory()
         {
-       
             var resp = await _client.GetAsync("api/ToDoLists");
-           
             Assert.AreEqual(HttpStatusCode.OK, resp.StatusCode);
         }
     }
